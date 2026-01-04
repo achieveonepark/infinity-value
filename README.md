@@ -9,7 +9,7 @@ Choose one of the following installation methods:
 ### Install via Unity Package Manager (UPM)
 1. Open UPM and click the + button in the top left. 
 2. Select Install package from git URL....
-3. Enter `https://github.com/achieveonepark/InfinityValue.git#1.0.0` and click Install.
+3. Enter `https://github.com/achieveonepark/InfinityValue.git#1.0.1` and click Install.
 
 ### Manual Addition
 
@@ -17,11 +17,12 @@ Open the manifest.json file in your Unity project’s Packages folder.
 Add the following line under dependencies:
 
 ```json
-"com.achieve.quick-save": "https://github.com/achieveonepark/InfinityValue.git#1.0.0"
+"com.achieve.infinity-value": "https://github.com/achieveonepark/InfinityValue.git#1.0.1"
 ```
 
 ##  Description
 - This package allows you to use custom units like A, B, C, etc., instead of standard units like million, billion, or trillion, making it easy to represent and work with extremely large numbers in a segmented format.
+- **Designed for high performance with minimal garbage collection (GC) overhead through internal structural optimizations, making it ideal for performance-critical applications like games.**
 - If the Newtonsoft.Json package is installed, a JsonConverter is automatically registered to handle serialization seamlessly.
 - Data is formatted in units such as "300F 200E" or "200AE 578AD," with operations performed directly on these representations. Calling ToString() will display the data in this format.
 - Migration from standard primitive data types is supported, and all standard C# operators (comparison, arithmetic) are compatible.<br><br>
