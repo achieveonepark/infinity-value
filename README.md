@@ -49,6 +49,12 @@ public class A
 
     public A()
     {
+        // 
+        InfinityValue.SetUnitNames(new List<string>
+        {
+            "A", "B", "C" ...
+        });
+        
         A = 1;                              // Can be initialized as an int
         B = "300F 200C";                    // Can be initialized as a formatted string
         C = 3.0f;                           // Supports float initialization
