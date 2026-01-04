@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text.RegularExpressions;
 
 namespace Achieve.InfinityValue
 {
@@ -19,14 +16,14 @@ namespace Achieve.InfinityValue
     {
         // 내부 저장소. 최대 8개의 서로 다른 (단위 인덱스, 값) 쌍을 저장합니다.
         private (int, long) _unit0, _unit1, _unit2, _unit3, _unit4, _unit5, _unit6, _unit7;
-        
+
         // 현재 구조체에 저장된 활성 단위-값 쌍의 수 (0-8).
         private int _unitCount;
 
         // 단위 이름의 문자열 표현(예: "A", "B", "K", "M")을 담고 있는 정적 리스트.
         // 이 리스트는 단위 인덱스와 문자열 이름 간의 매핑을 정의합니다.
         private static List<string> _unitNames;
-        
+
         /// <summary>
         /// 현재 InfinityValue 인스턴스가 0 또는 비어있는 값을 나타내는지 여부를 가져옵니다.
         /// </summary>
@@ -45,7 +42,7 @@ namespace Achieve.InfinityValue
             "CA", "CB", "CC", "CD", "CE", "CF", "CG", "CH", "CI", "CJ", "CK", "CL", "CM",
             "CN", "CO", "CP", "CQ", "CR", "CS", "CT", "CU", "CV", "CW", "CX", "CY", "CZ",
         };
-        
+
         // 정적 단위 이름 리스트가 null이거나 비어있는 경우 기본값으로 초기화되도록 보장합니다.
         private static void ValidateUnitNames()
         {
@@ -91,7 +88,7 @@ namespace Achieve.InfinityValue
             {
                 return "Infinity"; // Or some other error representation
             }
-            
+
             return $"{highestUnit.Item2}{_unitNames[highestUnit.Item1]}";
         }
 
@@ -162,7 +159,7 @@ namespace Achieve.InfinityValue
                     return false;
                 }
             }
-            
+
             return true;
         }
 
@@ -176,3 +173,5 @@ namespace Achieve.InfinityValue
         {
             return obj is InfinityValue other && Equals(other);
         }
+    }
+}
