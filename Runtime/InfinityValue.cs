@@ -1,6 +1,7 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace Achieve.InfinityValue
 {
@@ -20,18 +21,19 @@ namespace Achieve.InfinityValue
         // 현재 구조체에 저장된 활성 단위-값 쌍의 수 (0-8).
         private int _unitCount;
 
-        // 단위 이름의 문자열 표현(예: "A", "B", "K", "M")을 담고 있는 정적 리스트.
-        // 이 리스트는 단위 인덱스와 문자열 이름 간의 매핑을 정의합니다.
         private static List<string> _unitNames;
+        private static Dictionary<string, int> _unitNameLookup;
 
-        /// <summary>
-        /// 현재 InfinityValue 인스턴스가 0 또는 비어있는 값을 나타내는지 여부를 가져옵니다.
-        /// </summary>
+        /// <summary>0을 나타내는 InfinityValue입니다.</summary>
+        public static readonly InfinityValue Zero = default;
+
+        /// <summary>1을 나타내는 InfinityValue입니다.</summary>
+        public static readonly InfinityValue One = new InfinityValue(1L);
+
+        /// <summary>현재 InfinityValue 인스턴스가 0 또는 비어있는 값을 나타내는지 여부를 가져옵니다.</summary>
         public bool IsEmpty => _unitCount == 0;
 
-        // 사용자 지정 단위 이름이 설정되지 않은 경우 사용되는 기본 단위 이름입니다.
-        // 다양한 등급(예: A=1, B=2, ..., CZ=77)에 대한 인덱스-이름 매핑을 정의합니다.
-        private static readonly List<string> defaultUnitNames = new List<string>
+        private static readonly string[] defaultUnitNames =
         {
             "", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
             "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
@@ -43,135 +45,130 @@ namespace Achieve.InfinityValue
             "CN", "CO", "CP", "CQ", "CR", "CS", "CT", "CU", "CV", "CW", "CX", "CY", "CZ",
         };
 
-        // 정적 단위 이름 리스트가 null이거나 비어있는 경우 기본값으로 초기화되도록 보장합니다.
-        private static void ValidateUnitNames()
+        static InfinityValue()
         {
-            if (_unitNames == null || _unitNames.Count == 0)
-            {
-                _unitNames = defaultUnitNames;
-            }
+            _unitNames = new List<string>(defaultUnitNames);
+            _unitNameLookup = BuildLookup(_unitNames);
+        }
+
+        private static Dictionary<string, int> BuildLookup(List<string> names)
+        {
+            var dict = new Dictionary<string, int>(names.Count);
+            for (int i = 0; i < names.Count; i++)
+                dict[names[i]] = i;
+            return dict;
         }
 
         /// <summary>
         /// InfinityValue에 대한 사용자 지정 단위 이름을 설정합니다.
-        /// 이를 통해 기본 "A, B, C..." 시스템 대신 "K", "M", "B", "T"와 같은 사용자 지정 이름을 사용할 수 있습니다.
         /// </summary>
         /// <param name="unitNames">단위의 인덱스 순서대로 정렬된 문자열 표현 리스트입니다.</param>
         public static void SetUnitNames(List<string> unitNames)
         {
             _unitNames = unitNames;
+            _unitNameLookup = BuildLookup(unitNames);
         }
 
         /// <summary>
-        /// 현재 InfinityValue를 문자열 표현으로 변환합니다.
-        /// 가장 높은 유효 단위를 기준으로 값을 표시합니다 (예: "123C 200B" 또는 "500K").
+        /// 현재 InfinityValue를 문자열로 변환합니다.
+        /// 가장 높은 단위를 기준으로 소수점 2자리까지 표시합니다 (예: "1.23B", "500A").
         /// </summary>
-        /// <returns>값을 나타내는 문자열입니다.</returns>
         public override string ToString()
         {
             if (_unitCount == 0) return "0";
 
-            // Find the highest unit to display.
-            // The units are not guaranteed to be sorted perfectly after all operations.
-            (int, long) highestUnit = GetUnit(0);
+            var highest = GetHighestUnit();
+            if (highest.Item1 >= _unitNames.Count) return "Infinity";
+
+            if (highest.Item1 == 0)
+                return highest.Item2.ToString();
+
+            string suffix = _unitNames[highest.Item1];
+            long nextVal = GetValueForIndex(highest.Item1 - 1);
+            return $"{highest.Item2}.{(int)(nextVal / 10):D2}{suffix}";
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private (int, long) GetHighestUnit()
+        {
+            var best = GetUnit(0);
             for (int i = 1; i < _unitCount; i++)
             {
-                var unit = GetUnit(i);
-                if (unit.Item1 > highestUnit.Item1)
-                {
-                    highestUnit = unit;
-                }
+                var u = GetUnit(i);
+                if (u.Item1 > best.Item1) best = u;
             }
+            return best;
+        }
 
-            ValidateUnitNames();
-            if (highestUnit.Item1 >= _unitNames.Count)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private long GetValueForIndex(int unitIndex)
+        {
+            for (int i = 0; i < _unitCount; i++)
             {
-                return "Infinity"; // Or some other error representation
+                var u = GetUnit(i);
+                if (u.Item1 == unitIndex) return u.Item2;
             }
-
-            return $"{highestUnit.Item2}{_unitNames[highestUnit.Item1]}";
+            return 0;
         }
 
         /// <summary>
-        /// 현재 인스턴스를 다른 InfinityValue와 비교하고, 정렬 순서에서 현재 인스턴스가 다른 인스턴스보다 앞에 오는지, 뒤에 오는지, 또는 같은 위치에 있는지를 나타내는 정수를 반환합니다.
-        /// 이 비교 연산은 GC 할당을 유발하지 않습니다.
+        /// 현재 인스턴스를 다른 InfinityValue와 비교합니다. GC 할당을 유발하지 않습니다.
         /// </summary>
-        /// <param name="other">이 인스턴스와 비교할 객체입니다.</param>
-        /// <returns>비교 대상의 상대적인 순서를 나타내는 값입니다.</returns>
         public int CompareTo(InfinityValue other)
         {
-            // Compare from the highest unit downwards.
-            int aCount = this._unitCount;
-            int bCount = other._unitCount;
+            if (_unitCount == 0 && other._unitCount == 0) return 0;
+            if (_unitCount == 0) return -1;
+            if (other._unitCount == 0) return 1;
 
-            if (aCount == 0 && bCount == 0) return 0;
-            if (aCount == 0) return -1;
-            if (bCount == 0) return 1;
+            int aMax = GetHighestUnit().Item1;
+            int bMax = other.GetHighestUnit().Item1;
+            if (aMax != bMax) return aMax.CompareTo(bMax);
 
-            int aMaxIndex = -1, bMaxIndex = -1;
-            for (int i = 0; i < aCount; i++)
+            for (int i = aMax; i >= 0; i--)
             {
-                if (GetUnit(i).Item1 > aMaxIndex) aMaxIndex = GetUnit(i).Item1;
+                long aVal = GetValueForIndex(i);
+                long bVal = other.GetValueForIndex(i);
+                if (aVal != bVal) return aVal.CompareTo(bVal);
             }
-
-            for (int i = 0; i < bCount; i++)
-            {
-                if (other.GetUnit(i).Item1 > bMaxIndex) bMaxIndex = other.GetUnit(i).Item1;
-            }
-
-            if (aMaxIndex != bMaxIndex) return aMaxIndex.CompareTo(bMaxIndex);
-
-            // If highest units are the same, compare all units.
-            for (int i = aMaxIndex; i >= 0; i--)
-            {
-                long aValue = 0;
-                long bValue = 0;
-                for (int j = 0; j < aCount; j++)
-                {
-                    if (GetUnit(j).Item1 == i) aValue = GetUnit(j).Item2;
-                }
-
-                for (int j = 0; j < bCount; j++)
-                {
-                    if (other.GetUnit(j).Item1 == i) bValue = other.GetUnit(j).Item2;
-                }
-
-                if (aValue != bValue) return aValue.CompareTo(bValue);
-            }
-
             return 0;
         }
 
         /// <summary>
         /// 현재 InfinityValue 인스턴스가 지정된 다른 인스턴스와 같은지 여부를 확인합니다.
-        /// 이 동등성 검사는 GC 할당을 유발하지 않습니다.
+        /// 단위 슬롯 순서에 관계없이 의미적으로 동등한지 비교합니다. GC 할당을 유발하지 않습니다.
         /// </summary>
-        /// <param name="other">이 인스턴스와 비교할 객체입니다.</param>
-        /// <returns>두 인스턴스가 같으면 true이고, 그렇지 않으면 false입니다.</returns>
         public bool Equals(InfinityValue other)
         {
             if (_unitCount != other._unitCount) return false;
-
             for (int i = 0; i < _unitCount; i++)
             {
-                if (GetUnit(i) != other.GetUnit(i))
-                {
-                    return false;
-                }
+                var u = GetUnit(i);
+                if (other.GetValueForIndex(u.Item1) != u.Item2) return false;
             }
-
             return true;
         }
 
         /// <summary>
         /// 현재 인스턴스가 지정된 object와 같은지 여부를 확인합니다.
-        /// 값 타입에 대한 박싱(boxing)을 효율적으로 처리합니다.
         /// </summary>
-        /// <param name="obj">현재 인스턴스와 비교할 객체입니다.</param>
-        /// <returns>지정된 객체가 현재 인스턴스와 같으면 true이고, 그렇지 않으면 false입니다.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object obj) => obj is InfinityValue other && Equals(other);
+
+        /// <summary>
+        /// 현재 인스턴스의 해시 코드를 반환합니다. 단위 슬롯 순서에 독립적입니다. GC 할당을 유발하지 않습니다.
+        /// </summary>
+        public override int GetHashCode()
         {
-            return obj is InfinityValue other && Equals(other);
+            unchecked
+            {
+                int hash = 0;
+                for (int i = 0; i < _unitCount; i++)
+                {
+                    var u = GetUnit(i);
+                    // XOR은 교환법칙이 성립하므로 슬롯 순서에 독립적인 해시를 만듭니다.
+                    hash ^= u.Item1 * 397 ^ (int)(u.Item2 ^ (u.Item2 >> 32));
+                }
+                return hash;
+            }
         }
     }
 }
