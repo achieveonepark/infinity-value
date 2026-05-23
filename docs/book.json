@@ -1,7 +1,5 @@
 {
   "title": "Infinity Value",
   "description": "High-performance large number struct for Unity idle games",
-  "author": "AchieveOne",
-  "language": "en",
-  "plugins": ["-sharing", "-fontsettings", "-livereload"]
+  "language": "en"
 }
