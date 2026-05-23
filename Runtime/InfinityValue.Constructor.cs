@@ -1,109 +1,140 @@
 using System;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace Achieve.InfinityValue
 {
     public partial struct InfinityValue
     {
-        /// <summary>
-        /// long 타입의 숫자를 사용하여 InfinityValue 인스턴스를 생성합니다.
-        /// </summary>
-        /// <param name="number">초기화할 숫자 값입니다.</param>
+        /// <summary>long 타입의 숫자를 사용하여 InfinityValue 인스턴스를 생성합니다.</summary>
         public InfinityValue(long number)
         {
             _unit0 = _unit1 = _unit2 = _unit3 = _unit4 = _unit5 = _unit6 = _unit7 = default;
             _unitCount = 0;
 
-            if (number == 0) return;
+            if (number <= 0) return;
 
             long rem = number;
             int index = 0;
-            while(rem > 0)
+            while (rem > 0 && index < 8)
             {
                 long part = rem % 1000;
-                if (part > 0)
-                {
-                    AddUnit(index, part);
-                }
+                if (part > 0) AddUnit(index, part);
                 rem /= 1000;
                 index++;
             }
         }
-        
-        /// <summary>
-        /// float 타입의 숫자를 사용하여 InfinityValue 인스턴스를 생성합니다. 소수점 이하는 버려집니다.
-        /// </summary>
-        /// <param name="number">초기화할 숫자 값입니다.</param>
-        public InfinityValue(float number)
+
+        /// <summary>double 타입의 숫자를 사용하여 InfinityValue 인스턴스를 생성합니다. 소수점 이하는 버려집니다.</summary>
+        public InfinityValue(double number)
         {
-            this = new InfinityValue((long)number);
+            _unit0 = _unit1 = _unit2 = _unit3 = _unit4 = _unit5 = _unit6 = _unit7 = default;
+            _unitCount = 0;
+
+            if (number <= 0 || double.IsNaN(number) || double.IsInfinity(number)) return;
+
+            double rem = Math.Floor(number);
+            int index = 0;
+            while (rem >= 1.0 && index < 8)
+            {
+                long part = (long)(rem % 1000);
+                if (part > 0) AddUnit(index, part);
+                rem = Math.Floor(rem / 1000);
+                index++;
+            }
         }
 
+        /// <summary>float 타입의 숫자를 사용하여 InfinityValue 인스턴스를 생성합니다. 소수점 이하는 버려집니다.</summary>
+        public InfinityValue(float number) : this((double)number) { }
+
         /// <summary>
-        /// 문자열 표현(예: "1.23M", "500K")을 파싱하여 InfinityValue 인스턴스를 생성합니다.
+        /// 문자열 표현(예: "1.23B", "500A")을 파싱하여 InfinityValue 인스턴스를 생성합니다.
+        /// 파싱에 실패하면 0을 반환합니다.
         /// </summary>
-        /// <param name="input">파싱할 문자열입니다.</param>
         public InfinityValue(string input)
         {
             _unit0 = _unit1 = _unit2 = _unit3 = _unit4 = _unit5 = _unit6 = _unit7 = default;
             _unitCount = 0;
-            
-            ValidateUnitNames();
 
-            if (string.IsNullOrEmpty(input) || input == "0")
+            if (string.IsNullOrEmpty(input) || input == "0") return;
+
+            int pos = 0;
+            while (pos < input.Length)
             {
-                return;
-            }
-
-            int currentPos = 0;
-            while (currentPos < input.Length)
-            {
-                int numEnd = currentPos;
-                while (numEnd < input.Length && char.IsDigit(input[numEnd]))
+                if (!char.IsDigit(input[pos]))
                 {
-                    numEnd++;
-                }
-
-                if (numEnd == currentPos)
-                {
-                    currentPos++;
+                    pos++;
                     continue;
                 }
-                
-                long value = long.Parse(input.Substring(currentPos, numEnd - currentPos));
 
-                currentPos = numEnd;
-                int unitEnd = currentPos;
-                while (unitEnd < input.Length && char.IsLetter(input[unitEnd]))
+                int numStart = pos;
+                while (pos < input.Length && char.IsDigit(input[pos])) pos++;
+
+                if (!long.TryParse(input.Substring(numStart, pos - numStart), out long value)) break;
+
+                int unitStart = pos;
+                while (pos < input.Length && char.IsLetter(input[pos])) pos++;
+
+                int unitIndex = 0;
+                if (pos > unitStart)
                 {
-                    unitEnd++;
+                    string unitName = input.Substring(unitStart, pos - unitStart);
+                    if (!_unitNameLookup.TryGetValue(unitName, out unitIndex)) break;
                 }
 
-                if (unitEnd > currentPos)
-                {
-                    string unitName = input.Substring(currentPos, unitEnd - currentPos);
-                    int unitIndex = _unitNames.IndexOf(unitName);
-                    if (unitIndex != -1)
-                    {
-                        AddUnit(unitIndex, value);
-                    }
-                }
-                
-                currentPos = unitEnd;
+                AddUnit(unitIndex, value);
             }
-            
+
             Normalize();
         }
 
-        // 새 단위-값 쌍을 내부 저장소의 첫 번째 비어있는 슬롯에 추가합니다.
-        // 슬롯이 8개 모두 차 있으면 추가되지 않습니다.
+        /// <summary>
+        /// 문자열을 InfinityValue로 파싱을 시도합니다.
+        /// </summary>
+        /// <param name="input">파싱할 문자열입니다.</param>
+        /// <param name="result">파싱 성공 시 결과값입니다.</param>
+        /// <returns>파싱에 성공하면 true, 실패하면 false입니다.</returns>
+        public static bool TryParse(string input, out InfinityValue result)
+        {
+            result = default;
+            if (string.IsNullOrEmpty(input) || input == "0") return true;
+
+            int pos = 0;
+            while (pos < input.Length)
+            {
+                if (!char.IsDigit(input[pos]))
+                {
+                    pos++;
+                    continue;
+                }
+
+                int numStart = pos;
+                while (pos < input.Length && char.IsDigit(input[pos])) pos++;
+
+                if (!long.TryParse(input.Substring(numStart, pos - numStart), out long value))
+                    return false;
+
+                int unitStart = pos;
+                while (pos < input.Length && char.IsLetter(input[pos])) pos++;
+
+                int unitIndex = 0;
+                if (pos > unitStart)
+                {
+                    string unitName = input.Substring(unitStart, pos - unitStart);
+                    if (!_unitNameLookup.TryGetValue(unitName, out unitIndex))
+                        return false;
+                }
+
+                result.AddUnit(unitIndex, value);
+            }
+
+            result.Normalize();
+            return true;
+        }
+
         private void AddUnit(int index, long value)
         {
-            if (_unitCount >= 8)
-            {
-                return;
-            }
-            
+            if (_unitCount >= 8) return;
             switch (_unitCount)
             {
                 case 0: _unit0 = (index, value); break;
@@ -118,72 +149,128 @@ namespace Achieve.InfinityValue
             _unitCount++;
         }
 
-        // 내부 단위들을 정규화합니다.
-        // 1. 단위 인덱스를 기준으로 오름차순 정렬합니다.
-        // 2. 같은 인덱스를 가진 단위를 병합합니다.
-        // 3. 1000이 넘는 값을 다음 단위로 올립니다.
+        private void RemoveAt(int pos)
+        {
+            for (int j = pos; j < _unitCount - 1; j++)
+                SetUnit(j, GetUnit(j + 1));
+            _unitCount--;
+        }
+
+        private void InsertAt(int pos, (int, long) unit)
+        {
+            if (_unitCount >= 8) return;
+            for (int j = _unitCount; j > pos; j--)
+                SetUnit(j, GetUnit(j - 1));
+            SetUnit(pos, unit);
+            _unitCount++;
+        }
+
+        // 단위들을 정규화합니다:
+        // 1. 단위 인덱스 기준 오름차순 정렬 (삽입 정렬)
+        // 2. 같은 인덱스 병합
+        // 3. 올림(carry) 및 내림(borrow) 처리 — 재귀 없이 좌→우 순회
+        // 4. 0 이하의 단위 제거
         private void Normalize()
         {
-            for (int i = 0; i < _unitCount - 1; i++)
+            // 1. 삽입 정렬 (소규모 배열에 최적)
+            for (int i = 1; i < _unitCount; i++)
             {
-                for (int j = 0; j < _unitCount - i - 1; j++)
+                var key = GetUnit(i);
+                int j = i - 1;
+                while (j >= 0 && GetUnit(j).Item1 > key.Item1)
                 {
-                    if (GetUnit(j).Item1 > GetUnit(j + 1).Item1)
+                    SetUnit(j + 1, GetUnit(j));
+                    j--;
+                }
+                SetUnit(j + 1, key);
+            }
+
+            // 2. 같은 인덱스 병합
+            for (int i = 0; i < _unitCount - 1; )
+            {
+                var a = GetUnit(i);
+                var b = GetUnit(i + 1);
+                if (a.Item1 == b.Item1)
+                {
+                    SetUnit(i, (a.Item1, a.Item2 + b.Item2));
+                    RemoveAt(i + 1);
+                }
+                else i++;
+            }
+
+            // 3. 올림/내림 처리 (낮은 인덱스 → 높은 인덱스, 재귀 불필요)
+            for (int i = 0; i < _unitCount; i++)
+            {
+                var (idx, val) = GetUnit(i);
+
+                if (val < 0)
+                {
+                    // 내림: 상위 단위에서 빌려옴
+                    long borrow = (-val + 999) / 1000;
+                    SetUnit(i, (idx, val + borrow * 1000));
+
+                    if (i + 1 < _unitCount)
                     {
-                        var temp = GetUnit(j);
-                        SetUnit(j, GetUnit(j + 1));
-                        SetUnit(j + 1, temp);
+                        var next = GetUnit(i + 1);
+                        if (next.Item1 == idx + 1)
+                            SetUnit(i + 1, (next.Item1, next.Item2 - borrow));
+                        else
+                            InsertAt(i + 1, (idx + 1, -borrow));
+                    }
+                    else
+                    {
+                        // 빌릴 상위 단위 없음: 전체 값이 음수 → 0으로 클램핑
+                        SetUnit(i, (idx, 0));
+                    }
+                }
+                else if (val >= 1000)
+                {
+                    // 올림: 상위 단위로 올려보냄
+                    long carry = val / 1000;
+                    SetUnit(i, (idx, val % 1000));
+
+                    if (i + 1 < _unitCount)
+                    {
+                        var next = GetUnit(i + 1);
+                        if (next.Item1 == idx + 1)
+                            SetUnit(i + 1, (next.Item1, next.Item2 + carry));
+                        else
+                            InsertAt(i + 1, (idx + 1, carry));
+                    }
+                    else
+                    {
+                        InsertAt(i + 1, (idx + 1, carry));
                     }
                 }
             }
 
-            for (int i = 0; i < _unitCount - 1; i++)
+            // 4. 0 이하 단위 제거
+            for (int i = 0; i < _unitCount; )
             {
-                if (GetUnit(i).Item1 == GetUnit(i + 1).Item1)
-                {
-                    (int index, long value) unitA = GetUnit(i);
-                    (int index, long value) unitB = GetUnit(i + 1);
-                    SetUnit(i, (unitA.Item1, unitA.Item2 + unitB.Item2));
-                    
-                    for (int j = i + 1; j < _unitCount - 1; j++)
-                    {
-                        SetUnit(j, GetUnit(j + 1));
-                    }
-                    _unitCount--;
-                    i--;
-                }
-            }
-            
-            for (int i = 0; i < _unitCount; i++)
-            {
-                (int index, long value) = GetUnit(i);
-                if (value >= 1000)
-                {
-                    long overflow = value / 1000;
-                    value %= 1000;
-                    SetUnit(i, (index, value));
-                    AddOrUpdateUnit(index + 1, overflow);
-                }
+                if (GetUnit(i).Item2 <= 0)
+                    RemoveAt(i);
+                else
+                    i++;
             }
         }
 
-        // 정규화 과정에서 특정 인덱스의 값을 추가하거나 업데이트하는 헬퍼 메서드입니다.
+        // 연산자에서 사용: 해당 인덱스가 있으면 값을 더하고, 없으면 새 슬롯에 추가합니다.
+        // Normalize를 호출하지 않습니다 — 연산자가 마지막에 한 번 호출합니다.
         private void AddOrUpdateUnit(int index, long value)
         {
             for (int i = 0; i < _unitCount; i++)
             {
                 if (GetUnit(i).Item1 == index)
                 {
-                    (int idx, long val) = GetUnit(i);
-                    SetUnit(i, (idx, val + value));
+                    var u = GetUnit(i);
+                    SetUnit(i, (u.Item1, u.Item2 + value));
                     return;
                 }
             }
             AddUnit(index, value);
-            Normalize();
         }
-        
-        // 특정 슬롯 인덱스의 단위-값 쌍을 가져옵니다.
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private (int, long) GetUnit(int unit)
         {
             switch (unit)
@@ -199,8 +286,8 @@ namespace Achieve.InfinityValue
                 default: throw new ArgumentOutOfRangeException();
             }
         }
-        
-        // 특정 슬롯 인덱스에 단위-값 쌍을 설정합니다.
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void SetUnit(int unit, (int, long) value)
         {
             switch (unit)
@@ -217,37 +304,26 @@ namespace Achieve.InfinityValue
             }
         }
 
-        /// <summary>
-        /// int에서 InfinityValue로의 암시적 변환을 정의합니다.
-        /// </summary>
-        public static implicit operator InfinityValue(int value) => new InfinityValue(value);
-        /// <summary>
-        /// long에서 InfinityValue로의 암시적 변환을 정의합니다.
-        /// </summary>
+        /// <summary>int에서 InfinityValue로의 암시적 변환을 정의합니다.</summary>
+        public static implicit operator InfinityValue(int value) => new InfinityValue((long)value);
+        /// <summary>long에서 InfinityValue로의 암시적 변환을 정의합니다.</summary>
         public static implicit operator InfinityValue(long value) => new InfinityValue(value);
-        /// <summary>
-        /// float에서 InfinityValue로의 암시적 변환을 정의합니다.
-        /// </summary>
+        /// <summary>float에서 InfinityValue로의 암시적 변환을 정의합니다.</summary>
         public static implicit operator InfinityValue(float value) => new InfinityValue(value);
-        /// <summary>
-        /// string에서 InfinityValue로의 암시적 변환을 정의합니다.
-        /// </summary>
+        /// <summary>double에서 InfinityValue로의 암시적 변환을 정의합니다.</summary>
+        public static implicit operator InfinityValue(double value) => new InfinityValue(value);
+        /// <summary>string에서 InfinityValue로의 암시적 변환을 정의합니다.</summary>
         public static implicit operator InfinityValue(string value) => new InfinityValue(value);
-        /// <summary>
-        /// BigInteger에서 InfinityValue로의 암시적 변환을 정의합니다.
-        /// </summary>
+
+        /// <summary>BigInteger에서 InfinityValue로의 암시적 변환을 정의합니다.</summary>
         public static implicit operator InfinityValue(BigInteger value)
         {
             var result = new InfinityValue();
-            
             int index = 0;
-            while (value > 0)
+            while (value > 0 && index < 8)
             {
                 var rem = value % 1000;
-                if (rem > 0)
-                {
-                    result.AddUnit(index, (long)rem);
-                }
+                if (rem > 0) result.AddUnit(index, (long)rem);
                 value /= 1000;
                 index++;
             }
