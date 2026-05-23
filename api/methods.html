@@ -1,0 +1,598 @@
+
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Methods · Infinity Value</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.2.0">
+        <meta name="author" content="AchieveOne">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="conversion.html" />
+    
+    
+    <link rel="prev" href="operators.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../installation.html">
+            
+                <a href="../installation.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../getting-started.html">
+            
+                <a href="../getting-started.html">
+            
+                    
+                    Getting Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    API Reference
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="constructors.html">
+            
+                <a href="constructors.html">
+            
+                    
+                    Constructors
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="operators.html">
+            
+                <a href="operators.html">
+            
+                    
+                    Operators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.4" data-path="methods.html">
+            
+                <a href="methods.html">
+            
+                    
+                    Methods
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="conversion.html">
+            
+                <a href="conversion.html">
+            
+                    
+                    Type Conversions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    Advanced
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../advanced/unit-names.html">
+            
+                <a href="../advanced/unit-names.html">
+            
+                    
+                    Custom Unit Names
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../advanced/json.html">
+            
+                <a href="../advanced/json.html">
+            
+                    
+                    JSON Serialization
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../changelog.html">
+            
+                <a href="../changelog.html">
+            
+                    
+                    Changelog
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Methods</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="methods--properties">Methods &amp; Properties</h1>
+<hr></hr>
+<h2 id="static-properties">Static Properties</h2>
+<h3 id="zero">Zero</h3>
+<pre><code class="lang-csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">readonly</span> InfinityValue Zero;
+</code></pre>
+<p>The value <code>0</code>. Equivalent to <code>default(InfinityValue)</code>.</p>
+<pre><code class="lang-csharp">InfinityValue score = InfinityValue.Zero;
+Debug.Log(score.IsEmpty); <span class="hljs-comment">// true</span>
+</code></pre>
+<h3 id="one">One</h3>
+<pre><code class="lang-csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">readonly</span> InfinityValue One;
+</code></pre>
+<p>The value <code>1</code>.</p>
+<pre><code class="lang-csharp">InfinityValue counter = InfinityValue.One;
+</code></pre>
+<hr></hr>
+<h2 id="static-methods">Static Methods</h2>
+<h3 id="tryparse">TryParse</h3>
+<pre><code class="lang-csharp"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">TryParse</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> input, <span class="hljs-keyword">out</span> InfinityValue result</span>)
+</span></code></pre>
+<p>Attempts to parse a string into an <code>InfinityValue</code>. Returns <code>true</code> on success, <code>false</code> if the input contains an unrecognised unit name or invalid number.</p>
+<p>Use this instead of the <code>string</code> constructor when parsing user-supplied or externally loaded data.</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// Safe load from PlayerPrefs</span>
+<span class="hljs-built_in">string</span> raw = PlayerPrefs.GetString(<span class="hljs-string">"gold"</span>, <span class="hljs-string">"0"</span>);
+
+<span class="hljs-keyword">if</span> (InfinityValue.TryParse(raw, <span class="hljs-keyword">out</span> InfinityValue gold))
+{
+    Debug.Log(<span class="hljs-string">"Loaded: "</span> + gold);
+}
+<span class="hljs-keyword">else</span>
+{
+    Debug.LogWarning(<span class="hljs-string">"Corrupted save — resetting gold."</span>);
+    gold = InfinityValue.Zero;
+}
+</code></pre>
+<p><strong>Accepted formats:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input string</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"0"</code></td>
+<td><code>Zero</code></td>
+</tr>
+<tr>
+<td><code>"500"</code></td>
+<td><code>500</code></td>
+</tr>
+<tr>
+<td><code>"1A"</code></td>
+<td><code>1,000</code></td>
+</tr>
+<tr>
+<td><code>"5B"</code></td>
+<td><code>5,000,000</code></td>
+</tr>
+<tr>
+<td><code>"300F 200C"</code></td>
+<td><code>300F + 200C</code></td>
+</tr>
+<tr>
+<td><code>"5.30B"</code></td>
+<td>parsed as <code>5B 30A</code></td>
+</tr>
+<tr>
+<td><code>""</code> or <code>null</code></td>
+<td><code>Zero</code> (returns <code>true</code>)</td>
+</tr>
+<tr>
+<td><code>"999XYZ"</code></td>
+<td><code>false</code> — unknown unit</td>
+</tr>
+</tbody>
+</table>
+<hr></hr>
+<h3 id="setunitnames">SetUnitNames</h3>
+<pre><code class="lang-csharp"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetUnitNames</span>(<span class="hljs-params">List&lt;<span class="hljs-built_in">string</span>&gt; unitNames</span>)
+</span></code></pre>
+<p>Replaces the global unit name list used for display and parsing. Call once during app startup (e.g. <code>Awake</code>). See <a href="../advanced/unit-names.html">Custom Unit Names</a> for a full guide.</p>
+<pre><code class="lang-csharp">InfinityValue.SetUnitNames(<span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt;
+{
+    <span class="hljs-string">""</span>, <span class="hljs-string">"K"</span>, <span class="hljs-string">"M"</span>, <span class="hljs-string">"B"</span>, <span class="hljs-string">"T"</span>
+});
+</code></pre>
+<hr></hr>
+<h2 id="instance-properties">Instance Properties</h2>
+<h3 id="isempty">IsEmpty</h3>
+<pre><code class="lang-csharp"><span class="hljs-keyword">public</span> <span class="hljs-built_in">bool</span> IsEmpty { <span class="hljs-keyword">get</span>; }
+</code></pre>
+<p>Returns <code>true</code> when the value is <code>0</code> (no internal units stored). Allocation-free.</p>
+<pre><code class="lang-csharp">InfinityValue v = InfinityValue.Zero;
+Debug.Log(v.IsEmpty); <span class="hljs-comment">// true</span>
+
+v += <span class="hljs-number">1L</span>;
+Debug.Log(v.IsEmpty); <span class="hljs-comment">// false</span>
+</code></pre>
+<hr></hr>
+<h2 id="instance-methods">Instance Methods</h2>
+<h3 id="tostring">ToString</h3>
+<pre><code class="lang-csharp"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-built_in">string</span> <span class="hljs-title">ToString</span>()
+</span></code></pre>
+<p>Renders the value as a human-readable string using the <strong>highest significant unit</strong> with 2 decimal places sourced from the next lower unit.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td><code>"0"</code></td>
+</tr>
+<tr>
+<td><code>999</code></td>
+<td><code>"999"</code></td>
+</tr>
+<tr>
+<td><code>1,500</code></td>
+<td><code>"1.50A"</code></td>
+</tr>
+<tr>
+<td><code>5,300,000,000</code></td>
+<td><code>"5.30B"</code></td>
+</tr>
+<tr>
+<td><code>1,005,000</code></td>
+<td><code>"1.00B"</code></td>
+</tr>
+<tr>
+<td>Exceeds unit table</td>
+<td><code>"Infinity"</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="lang-csharp">InfinityValue v = <span class="hljs-number">5</span>_300_000_000L;
+Debug.Log(v); <span class="hljs-comment">// "5.30B"</span>
+
+<span class="hljs-comment">// Use directly with UI Text</span>
+goldLabel.text = playerGold.ToString();
+</code></pre>
+<hr></hr>
+<h3 id="compareto">CompareTo</h3>
+<pre><code class="lang-csharp"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">CompareTo</span>(<span class="hljs-params">InfinityValue other</span>)
+</span></code></pre>
+<p><code>IComparable&lt;InfinityValue&gt;</code> implementation. Returns negative, zero, or positive. Allocation-free.</p>
+<pre><code class="lang-csharp"><span class="hljs-keyword">var</span> list = <span class="hljs-keyword">new</span> List&lt;InfinityValue&gt; { <span class="hljs-string">"5B"</span>, <span class="hljs-string">"200A"</span>, <span class="hljs-string">"3C"</span> };
+list.Sort(); <span class="hljs-comment">// uses CompareTo</span>
+<span class="hljs-comment">// result: 200A, 5B, 3C</span>
+</code></pre>
+<hr></hr>
+<h3 id="equals">Equals</h3>
+<pre><code class="lang-csharp"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">Equals</span>(<span class="hljs-params">InfinityValue other</span>)
+</span></code></pre>
+<p><code>IEquatable&lt;InfinityValue&gt;</code> implementation. Compares by <strong>semantic value</strong>, not internal slot order. Allocation-free.</p>
+<pre><code class="lang-csharp">InfinityValue a = <span class="hljs-number">1</span>_000_000L;
+InfinityValue b = <span class="hljs-string">"1B"</span>;
+Debug.Log(a == b); <span class="hljs-comment">// true</span>
+</code></pre>
+<hr></hr>
+<h3 id="gethashcode">GetHashCode</h3>
+<pre><code class="lang-csharp"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-built_in">int</span> <span class="hljs-title">GetHashCode</span>()
+</span></code></pre>
+<p>Order-independent hash derived from unit index/value pairs. Safe for use in <code>Dictionary</code> and <code>HashSet</code>. Allocation-free.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="operators.html" class="navigation navigation-prev " aria-label="Previous page: Operators">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="conversion.html" class="navigation navigation-next " aria-label="Next page: Type Conversions">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Methods","level":"1.4.4","depth":2,"next":{"title":"Type Conversions","level":"1.4.5","depth":2,"path":"api/conversion.md","ref":"api/conversion.md","articles":[]},"previous":{"title":"Operators","level":"1.4.3","depth":2,"path":"api/operators.md","ref":"api/operators.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","-fontsettings","-livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"AchieveOne","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Infinity Value","language":"en","gitbook":"*","description":"High-performance large number struct for Unity idle games"},"file":{"path":"api/methods.md","mtime":"2026-05-23T23:18:12.500Z","type":"markdown"},"gitbook":{"version":"6.2.0","time":"2026-05-23T23:18:21.452Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,485 @@
+
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <title>JSON Serialization · Infinity Value</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.2.0">
+        <meta name="author" content="AchieveOne">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../changelog.html" />
+    
+    
+    <link rel="prev" href="unit-names.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../installation.html">
+            
+                <a href="../installation.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../getting-started.html">
+            
+                <a href="../getting-started.html">
+            
+                    
+                    Getting Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    API Reference
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../api/">
+            
+                <a href="../api/">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../api/constructors.html">
+            
+                <a href="../api/constructors.html">
+            
+                    
+                    Constructors
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../api/operators.html">
+            
+                <a href="../api/operators.html">
+            
+                    
+                    Operators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../api/methods.html">
+            
+                <a href="../api/methods.html">
+            
+                    
+                    Methods
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../api/conversion.html">
+            
+                <a href="../api/conversion.html">
+            
+                    
+                    Type Conversions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    Advanced
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="unit-names.html">
+            
+                <a href="unit-names.html">
+            
+                    
+                    Custom Unit Names
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.2" data-path="json.html">
+            
+                <a href="json.html">
+            
+                    
+                    JSON Serialization
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../changelog.html">
+            
+                <a href="../changelog.html">
+            
+                    
+                    Changelog
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >JSON Serialization</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="json-serialization">JSON Serialization</h1>
+<p><code>InfinityValue</code> supports automatic JSON serialization via <strong>Newtonsoft.Json</strong> when enabled.</p>
+<hr></hr>
+<h2 id="enabling-json-support">Enabling JSON Support</h2>
+<ol>
+<li>Install the Newtonsoft.Json package in your Unity project (e.g. via <code>com.unity.nuget.newtonsoft-json</code>).</li>
+<li>Add the scripting define symbol:<ul>
+<li><strong>Edit → Project Settings → Player → Scripting Define Symbols</strong></li>
+<li>Add: <code>USE_NEWTONSOFT_JSON</code></li>
+</ul>
+</li>
+</ol>
+<hr></hr>
+<h2 id="how-it-works">How It Works</h2>
+<p>When <code>USE_NEWTONSOFT_JSON</code> is defined, the <code>[JsonConverter(typeof(InfinityValueConverter))]</code> attribute is applied to <code>InfinityValue</code>. The converter:</p>
+<ul>
+<li><strong>Serializes</strong> by calling <code>ToString()</code> — e.g. <code>"5.30B"</code></li>
+<li><strong>Deserializes</strong> by calling <code>new InfinityValue(string)</code> — parses the stored string back</li>
+</ul>
+<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> Newtonsoft.Json;
+
+[<span class="hljs-meta">System.Serializable</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlayerSave</span>
+{
+    <span class="hljs-keyword">public</span> InfinityValue Gold;
+    <span class="hljs-keyword">public</span> InfinityValue Score;
+}
+
+<span class="hljs-comment">// Serialize</span>
+<span class="hljs-keyword">var</span> save = <span class="hljs-keyword">new</span> PlayerSave { Gold = <span class="hljs-number">5</span>_300_000_000L, Score = <span class="hljs-string">"12C"</span> };
+<span class="hljs-built_in">string</span> json = JsonConvert.SerializeObject(save);
+<span class="hljs-comment">// {"Gold":"5.30B","Score":"12.00C"}</span>
+
+<span class="hljs-comment">// Deserialize</span>
+<span class="hljs-keyword">var</span> loaded = JsonConvert.DeserializeObject&lt;PlayerSave&gt;(json);
+Debug.Log(loaded.Gold);  <span class="hljs-comment">// "5.30B"</span>
+Debug.Log(loaded.Score); <span class="hljs-comment">// "12.00C"</span>
+</code></pre>
+<hr></hr>
+<h2 id="saving-to-playerprefs-without-json">Saving to PlayerPrefs (without JSON)</h2>
+<p>If you prefer not to use JSON, save values directly as strings:</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// Save</span>
+PlayerPrefs.SetString(<span class="hljs-string">"gold"</span>, playerGold.ToString());
+PlayerPrefs.Save();
+
+<span class="hljs-comment">// Load</span>
+<span class="hljs-keyword">if</span> (!InfinityValue.TryParse(PlayerPrefs.GetString(<span class="hljs-string">"gold"</span>, <span class="hljs-string">"0"</span>), <span class="hljs-keyword">out</span> InfinityValue playerGold))
+    playerGold = InfinityValue.Zero;
+</code></pre>
+<hr></hr>
+<h2 id="round-trip-safety">Round-trip Safety</h2>
+<p>Because serialization uses <code>ToString()</code> and deserialization uses the string constructor, the round-trip is safe as long as:</p>
+<ul>
+<li>The <strong>unit name list has not changed</strong> between save and load.</li>
+<li>The stored string was produced by <code>ToString()</code> (which always uses valid unit names).</li>
+</ul>
+<p>If you change <code>SetUnitNames</code> between app versions, existing saves will fail to parse — plan for migration or use a stable unit name set from the start.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="unit-names.html" class="navigation navigation-prev " aria-label="Previous page: Custom Unit Names">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../changelog.html" class="navigation navigation-next " aria-label="Next page: Changelog">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"JSON Serialization","level":"1.5.2","depth":2,"next":{"title":"Changelog","level":"1.6","depth":1,"path":"changelog.md","ref":"changelog.md","articles":[]},"previous":{"title":"Custom Unit Names","level":"1.5.1","depth":2,"path":"advanced/unit-names.md","ref":"advanced/unit-names.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","-fontsettings","-livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"AchieveOne","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Infinity Value","language":"en","gitbook":"*","description":"High-performance large number struct for Unity idle games"},"file":{"path":"advanced/json.md","mtime":"2026-05-23T23:18:12.500Z","type":"markdown"},"gitbook":{"version":"6.2.0","time":"2026-05-23T23:18:21.452Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+
+    </body>
+</html>
+
