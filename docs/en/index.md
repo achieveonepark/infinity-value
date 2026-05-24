@@ -2,7 +2,7 @@
 layout: home
 hero:
   name: Infinity Value
-  text: Large Number Struct for Idle Games
+  text: "Large Number Struct\nfor Unity Idle Games"
   tagline: Represent arbitrarily large numbers with zero GC overhead
   actions:
     - theme: brand

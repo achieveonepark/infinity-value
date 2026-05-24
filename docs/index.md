@@ -1,8 +1,8 @@
 ---
 layout: home
 hero:
-  name: Infinity Value
-  text: 방치형 게임을 위한 대형 숫자 구조체
+  name: "Infinity Value"
+  text: "방치형 게임을 위한\n대형 숫자 구조체"
   tagline: GC 부담 없이 무한히 커지는 수치를 표현하세요
   actions:
     - theme: brand

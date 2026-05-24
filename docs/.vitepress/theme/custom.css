@@ -1,0 +1,40 @@
+/* ── Hero ────────────────────────────────────────── */
+
+/* Add vertical gap between .name and .text in hero heading */
+.VPHero .heading {
+  gap: 12px;
+}
+
+/* Tighten font size a little on small phones so title doesn't overflow */
+@media (max-width: 480px) {
+  .VPHero .name,
+  .VPHero .text {
+    font-size: 28px !important;
+    line-height: 36px !important;
+  }
+}
+
+/* ── Mobile nav: hide the duplicate locale switcher ─ */
+
+/*
+ * VPNavBarExtra (visible 768–1280px) contains a locale section.
+ * On screens where both the hamburger menu AND VPNavBarExtra appear,
+ * the locale list shows twice. Hide it from the bar flyout on tablet.
+ */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .VPNavBarExtra .group.translations {
+    display: none;
+  }
+}
+
+/* ── vp-icons fallback ───────────────────────────── */
+
+/*
+ * If the vp-icons font fails to load (e.g. CSP / Safari),
+ * swap icon spans to visible Unicode fallbacks so the UI
+ * doesn't show empty squares.
+ */
+.vpi-sun::before    { content: '☀'; font-style: normal; }
+.vpi-moon::before   { content: '☾'; font-style: normal; }
+.vpi-languages::before { content: '🌐'; font-style: normal; }
+.vpi-chevron-down::before { content: '▾'; font-style: normal; }
