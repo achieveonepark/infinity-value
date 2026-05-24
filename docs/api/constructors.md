@@ -1,6 +1,6 @@
-# Constructors
+# 생성자
 
-`InfinityValue` can be constructed from several numeric and string types. All numeric types also support **implicit conversion**, so you can assign them directly without `new`.
+`InfinityValue`는 여러 숫자 타입과 문자열에서 생성할 수 있습니다. 모든 타입은 **암묵적 변환**도 지원하므로 `new` 키워드 없이 직접 대입이 가능합니다.
 
 ---
 
@@ -10,11 +10,11 @@
 public InfinityValue(long number)
 ```
 
-Creates a value from a `long`. Values ≤ 0 produce `Zero`.
+`long` 값에서 생성합니다. 0 이하의 값은 `Zero`를 반환합니다.
 
 ```csharp
 InfinityValue v = new InfinityValue(1_500_000L);
-// or implicitly:
+// 암묵적 변환도 동일:
 InfinityValue v = 1_500_000L;
 
 Debug.Log(v); // "1.50A"
@@ -28,17 +28,17 @@ Debug.Log(v); // "1.50A"
 public InfinityValue(double number)
 ```
 
-Creates a value from a `double`. Useful for very large values that exceed `long.MaxValue` or for results of floating-point formulas. Fractional parts are truncated.
+`double` 값에서 생성합니다. `long.MaxValue`를 초과하는 큰 값이나 부동소수점 수식 결과에 적합합니다. 소수 부분은 버림 처리됩니다.
 
 ```csharp
 InfinityValue v = new InfinityValue(1.5e12);
-// or implicitly:
+// 암묵적 변환도 동일:
 InfinityValue v = 1.5e12;
 
 Debug.Log(v); // "1.50C"
 ```
 
-> `NaN` and `Infinity` inputs produce `Zero`.
+> `NaN` 또는 `Infinity` 입력은 `Zero`를 반환합니다.
 
 ---
 
@@ -48,11 +48,26 @@ Debug.Log(v); // "1.50C"
 public InfinityValue(float number)
 ```
 
-Delegates to the `double` constructor. Fractional parts are truncated.
+`double` 생성자에 위임합니다. 소수 부분은 버림 처리됩니다.
 
 ```csharp
 InfinityValue v = 3.0f;
 Debug.Log(v); // "3"
+```
+
+---
+
+## InfinityValue(int)
+
+```csharp
+public InfinityValue(int number)
+```
+
+`int` 값에서 생성합니다. 내부적으로 `long`으로 변환됩니다.
+
+```csharp
+InfinityValue v = 1000;
+Debug.Log(v); // "1.00A"
 ```
 
 ---
@@ -63,23 +78,23 @@ Debug.Log(v); // "3"
 public InfinityValue(string input)
 ```
 
-Parses a formatted string. The expected format is one or more `<number><unit>` pairs separated by spaces (e.g. `"5B"`, `"300F 200C"`).
+포맷된 문자열을 파싱합니다. 허용 형식은 `<숫자><단위>` 쌍을 공백으로 구분한 것입니다 (예: `"5B"`, `"300F 200C"`).
 
 ```csharp
 InfinityValue v = new InfinityValue("300F 200C");
-// or implicitly:
+// 암묵적 변환도 동일:
 InfinityValue v = "300F 200C";
 ```
 
-Unit names are matched against the current unit name list (default: `A`–`CZ`).
+단위 이름은 현재 설정된 단위 목록(기본: `A`–`CZ`)과 매칭됩니다.
 
-Invalid input returns `Zero` silently. Use [`TryParse`](methods.md#tryparse) when you need error detection.
+잘못된 입력은 조용히 `Zero`를 반환합니다. 오류 감지가 필요하면 [`TryParse`](/api/methods#tryparse)를 사용하세요.
 
 ---
 
 ## InfinityValue(BigInteger)
 
-Implicit conversion from `System.Numerics.BigInteger`. Values above the 8-unit limit (≈ 10^316) lose the highest digits.
+`System.Numerics.BigInteger`에서의 암묵적 변환입니다. 내부 8슬롯 한계(≈ 10^316)를 초과하는 값은 상위 자릿수가 손실됩니다.
 
 ```csharp
 using System.Numerics;
@@ -90,9 +105,9 @@ Debug.Log(v); // "30.00D"
 
 ---
 
-## Implicit Conversion Summary
+## 암묵적 변환 요약
 
-All of the above types support direct assignment:
+모든 지원 타입은 직접 대입이 가능합니다.
 
 ```csharp
 InfinityValue a = 1000;              // int

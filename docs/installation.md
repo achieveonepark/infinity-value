@@ -1,18 +1,18 @@
-# Installation
+# 설치 가이드
 
-## Requirements
+## 요구 사항
 
-- Unity **2022.3** or later
+- Unity **2022.3** 이상
 - .NET Standard 2.1+
 
 ---
 
-## Via Unity Package Manager (UPM)
+## UPM으로 설치하기
 
-1. Open the **Package Manager** window (`Window → Package Manager`).
-2. Click the **`+`** button in the top-left corner.
-3. Select **Add package from git URL...**
-4. Enter the following URL and click **Add**:
+1. **Package Manager** 창을 엽니다 (`Window → Package Manager`).
+2. 좌측 상단의 **`+`** 버튼을 클릭합니다.
+3. **Add package from git URL...** 을 선택합니다.
+4. 아래 URL을 입력하고 **Add**를 클릭합니다.
 
 ```
 https://github.com/achieveonepark/InfinityValue.git#1.1.0
@@ -20,9 +20,9 @@ https://github.com/achieveonepark/InfinityValue.git#1.1.0
 
 ---
 
-## Via manifest.json
+## manifest.json으로 설치하기
 
-Open `Packages/manifest.json` in your project and add the entry under `dependencies`:
+프로젝트의 `Packages/manifest.json` 파일을 열고 `dependencies` 항목에 다음을 추가합니다.
 
 ```json
 {
@@ -34,23 +34,24 @@ Open `Packages/manifest.json` in your project and add the entry under `dependenc
 
 ---
 
-## Optional: Newtonsoft.Json Support
+## 선택 사항: Newtonsoft.Json 지원
 
-If you have **Newtonsoft.Json** (e.g. `com.unity.nuget.newtonsoft-json`) installed, add the scripting define symbol to enable automatic JSON serialization:
+**Newtonsoft.Json** (`com.unity.nuget.newtonsoft-json` 등)이 프로젝트에 설치되어 있다면, 스크립팅 정의 심볼을 추가하여 JSON 직렬화를 활성화할 수 있습니다.
 
-1. Go to **Edit → Project Settings → Player**.
-2. Under **Scripting Define Symbols**, add:
-   ```
-   USE_NEWTONSOFT_JSON
-   ```
+1. **Edit → Project Settings → Player**로 이동합니다.
+2. **Scripting Define Symbols** 항목에 아래 심볼을 추가합니다.
 
-See [JSON Serialization](advanced/json.md) for usage details.
+```
+USE_NEWTONSOFT_JSON
+```
+
+자세한 사용법은 [JSON 직렬화](/advanced/json) 페이지를 참고하세요.
 
 ---
 
-## Verifying the Install
+## 설치 확인
 
-Add the following to any MonoBehaviour to confirm the package is working:
+아래 코드를 아무 MonoBehaviour에 추가해서 패키지가 정상 동작하는지 확인하세요.
 
 ```csharp
 using Achieve.InfinityValue;
@@ -61,9 +62,9 @@ public class InstallCheck : MonoBehaviour
     void Start()
     {
         InfinityValue v = 1_500_000L;
-        Debug.Log(v); // Expected: "1.50A"
+        Debug.Log(v); // 출력 예: "1.50A"
     }
 }
 ```
 
-> **Next:** [Getting Started →](getting-started.md)
+> **다음:** [빠른 시작 →](/getting-started)

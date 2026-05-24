@@ -1,15 +1,15 @@
-# Type Conversions
+# 타입 변환
 
-`InfinityValue` supports both **implicit** (lossless direction) and **explicit** (potentially lossy direction) conversions.
+`InfinityValue`는 **암묵적 변환** (손실 없는 방향)과 **명시적 변환** (손실 가능성 있는 방향) 모두를 지원합니다.
 
 ---
 
-## Implicit Conversions (to InfinityValue)
+## 암묵적 변환 (→ InfinityValue)
 
-These are lossless — you can assign without a cast.
+손실이 없으므로 캐스트 없이 대입할 수 있습니다.
 
-| From type | Example |
-|-----------|---------|
+| 원본 타입 | 예제 |
+|-----------|------|
 | `int` | `InfinityValue v = 1000;` |
 | `long` | `InfinityValue v = 1_000_000L;` |
 | `float` | `InfinityValue v = 3.0f;` |
@@ -19,9 +19,9 @@ These are lossless — you can assign without a cast.
 
 ---
 
-## Explicit Conversions (from InfinityValue)
+## 명시적 변환 (InfinityValue →)
 
-These require a cast and may lose precision for large values.
+캐스트가 필요하며, 큰 값에서는 정밀도 손실이 발생할 수 있습니다.
 
 ### (long)
 
@@ -29,7 +29,7 @@ These require a cast and may lose precision for large values.
 public static explicit operator long(InfinityValue value)
 ```
 
-Approximates the value as a `long`. Only the lowest two significant units are used. Values above `long.MaxValue` (~9.2 × 10^18) will overflow.
+값을 `long`으로 근사 변환합니다. 하위 두 유효 단위만 사용합니다. `long.MaxValue`(~9.2 × 10^18)를 초과하는 값은 오버플로우됩니다.
 
 ```csharp
 InfinityValue v = "5B 300A";  // 5,300,000,000
@@ -38,8 +38,8 @@ Debug.Log(l); // 5300000000
 ```
 
 ```csharp
-InfinityValue large = "100C"; // 100,000,000,000,000 — exceeds long range
-long l = (long)large;         // result is approximate / overflows
+InfinityValue large = "100C"; // long 범위 초과 — 결과가 근사값이거나 오버플로우
+long l = (long)large;
 ```
 
 ### (double)
@@ -48,16 +48,14 @@ long l = (long)large;         // result is approximate / overflows
 public static explicit operator double(InfinityValue value)
 ```
 
-Converts to `double` by summing all units scaled to their magnitude. Loses precision for values with many significant digits.
+모든 단위를 규모별로 합산하여 `double`로 변환합니다. 유효 자릿수가 많은 값은 정밀도가 손실됩니다.
 
 ```csharp
 InfinityValue v = "5B 300A";
 double d = (double)v;
 Debug.Log(d); // 5300000000
-```
 
-```csharp
-// Useful for progress calculations
+// 진행도 계산에 유용
 float progress = (float)((double)currentXP / (double)requiredXP);
 ```
 
@@ -67,22 +65,22 @@ float progress = (float)((double)currentXP / (double)requiredXP);
 public static explicit operator float(InfinityValue value)
 ```
 
-Delegates to `(double)` and then narrows to `float`. Significant precision loss for large values.
+`(double)` 변환 후 `float`으로 좁힙니다. 큰 값에서는 정밀도 손실이 큽니다.
 
 ```csharp
 InfinityValue v = "5B";
 float f = (float)v;
-Debug.Log(f); // 5E+09 (approximately)
+Debug.Log(f); // 5E+09 (근사값)
 ```
 
 ---
 
-## Precision Notes
+## 정밀도 참고 표
 
-| Conversion | Safe range | Notes |
+| 변환 | 안전한 범위 | 비고 |
 |---|---|---|
-| `(long)` | up to ~`9A` (`9.2 × 10^18`) | Uses lowest 2 units only |
-| `(double)` | up to ~`1AW` (`10^52`) | IEEE 754 double has 15–17 significant digits |
-| `(float)` | up to ~`1H` (`10^24`) | IEEE 754 float has ~7 significant digits |
+| `(long)` | ~`9A` (`9.2 × 10^18`) 이하 | 하위 2단위만 사용 |
+| `(double)` | ~`1AW` (`10^52`) 이하 | IEEE 754 double — 유효 자릿수 15–17 |
+| `(float)` | ~`1H` (`10^24`) 이하 | IEEE 754 float — 유효 자릿수 약 7 |
 
-For values beyond these ranges, use `ToString()` and string-based persistence rather than numeric conversions.
+이 범위를 초과하는 값은 숫자 변환 대신 `ToString()`과 문자열 기반 저장을 사용하세요.

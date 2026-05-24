@@ -26,13 +26,13 @@ jobs:
         working-directory: docs
 
       - name: Build documentation
-        run: npx honkit build . _book
+        run: npm run docs:build
         working-directory: docs
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/_book
+          publish_dir: docs/.vitepress/dist
           cname: somiri.dev
           commit_message: 'docs: deploy ${{ github.sha }}'
