@@ -1,530 +1,67 @@
-
-<!DOCTYPE HTML>
-<html lang="en" >
-    <head>
-        <meta charset="UTF-8">
-        <title>Getting Started · Infinity Value</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="">
-        <meta name="generator" content="HonKit 6.2.0">
-        <meta name="author" content="AchieveOne">
-        
-        
+<!DOCTYPE html>
+<html lang="ko-KR" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>빠른 시작 | Infinity Value</title>
+    <meta name="description" content="유니티 방치형 게임을 위한 고성능 대형 숫자 구조체">
+    <meta name="generator" content="VitePress v1.6.4">
+    <link rel="preload stylesheet" href="/assets/style.qp7qGaqN.css" as="style">
+    <link rel="preload stylesheet" href="/vp-icons.css" as="style">
     
-    <link rel="stylesheet" href="gitbook/style.css">
-
+    <script type="module" src="/assets/app.CCxwYppO.js"></script>
+    <link rel="preload" href="/assets/inter-roman-latin.Di8DUHzh.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="modulepreload" href="/assets/chunks/theme.DRiwGlFg.js">
+    <link rel="modulepreload" href="/assets/chunks/framework.BPKcPtvA.js">
+    <link rel="modulepreload" href="/assets/getting-started.md.By4VlEwT.lean.js">
+    <script id="check-dark-mode">(()=>{const e=localStorage.getItem("vitepress-theme-appearance")||"auto",a=window.matchMedia("(prefers-color-scheme: dark)").matches;(!e||e==="auto"?a:e==="dark")&&document.documentElement.classList.add("dark")})();</script>
+    <script id="check-mac-os">document.documentElement.classList.toggle("mac",/Mac|iPhone|iPod|iPad/i.test(navigator.platform));</script>
+  </head>
+  <body>
+    <div id="app"><div class="Layout" data-v-d8b57b2d><!--[--><!--]--><!--[--><span tabindex="-1" data-v-fcbfc0e0></span><a href="#VPContent" class="VPSkipLink visually-hidden" data-v-fcbfc0e0>Skip to content</a><!--]--><!----><header class="VPNav" data-v-d8b57b2d data-v-7ad780c2><div class="VPNavBar" data-v-7ad780c2 data-v-9fd4d1dd><div class="wrapper" data-v-9fd4d1dd><div class="container" data-v-9fd4d1dd><div class="title" data-v-9fd4d1dd><div class="VPNavBarTitle has-sidebar" data-v-9fd4d1dd data-v-9f43907a><a class="title" href="/" data-v-9f43907a><!--[--><!--]--><!----><span data-v-9f43907a>Infinity Value</span><!--[--><!--]--></a></div></div><div class="content" data-v-9fd4d1dd><div class="content-body" data-v-9fd4d1dd><!--[--><!--]--><div class="VPNavBarSearch search" data-v-9fd4d1dd><!--[--><!----><div id="local-search"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search"><span class="DocSearch-Button-Container"><span class="vp-icon DocSearch-Search-Icon"></span><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"><kbd class="DocSearch-Button-Key"></kbd><kbd class="DocSearch-Button-Key">K</kbd></span></button></div><!--]--></div><nav aria-labelledby="main-nav-aria-label" class="VPNavBarMenu menu" data-v-9fd4d1dd data-v-afb2845e><span id="main-nav-aria-label" class="visually-hidden" data-v-afb2845e> Main Navigation </span><!--[--><!--[--><a class="VPLink link VPNavBarMenuLink active" href="/getting-started.html" tabindex="0" data-v-afb2845e data-v-815115f5><!--[--><span data-v-815115f5>가이드</span><!--]--></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/api/" tabindex="0" data-v-afb2845e data-v-815115f5><!--[--><span data-v-815115f5>API</span><!--]--></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/changelog.html" tabindex="0" data-v-afb2845e data-v-815115f5><!--[--><span data-v-815115f5>변경 이력</span><!--]--></a><!--]--><!--]--></nav><div class="VPFlyout VPNavBarTranslations translations" data-v-9fd4d1dd data-v-acee064b data-v-bfe7971f><button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label="Change language" data-v-bfe7971f><span class="text" data-v-bfe7971f><span class="vpi-languages option-icon" data-v-bfe7971f></span><!----><span class="vpi-chevron-down text-icon" data-v-bfe7971f></span></span></button><div class="menu" data-v-bfe7971f><div class="VPMenu" data-v-bfe7971f data-v-20ed86d6><!----><!--[--><!--[--><div class="items" data-v-acee064b><p class="title" data-v-acee064b>한국어</p><!--[--><div class="VPMenuLink" data-v-acee064b data-v-7eeeb2dc><a class="VPLink link" href="/en/getting-started.html" data-v-7eeeb2dc><!--[--><span data-v-7eeeb2dc>English</span><!--]--></a></div><!--]--></div><!--]--><!--]--></div></div></div><div class="VPNavBarAppearance appearance" data-v-9fd4d1dd data-v-3f90c1a5><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-3f90c1a5 data-v-be9742d9 data-v-b4ccac88><span class="check" data-v-b4ccac88><span class="icon" data-v-b4ccac88><!--[--><span class="vpi-sun sun" data-v-be9742d9></span><span class="vpi-moon moon" data-v-be9742d9></span><!--]--></span></span></button></div><div class="VPSocialLinks VPNavBarSocialLinks social-links" data-v-9fd4d1dd data-v-ef6192dc data-v-e71e869c><!--[--><a class="VPSocialLink no-icon" href="https://github.com/achieveonepark/InfinityValue" aria-label="github" target="_blank" rel="noopener" data-v-e71e869c data-v-60a9a2d3><span class="vpi-social-github"></span></a><!--]--></div><div class="VPFlyout VPNavBarExtra extra" data-v-9fd4d1dd data-v-f953d92f data-v-bfe7971f><button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label="extra navigation" data-v-bfe7971f><span class="vpi-more-horizontal icon" data-v-bfe7971f></span></button><div class="menu" data-v-bfe7971f><div class="VPMenu" data-v-bfe7971f data-v-20ed86d6><!----><!--[--><!--[--><div class="group translations" data-v-f953d92f><p class="trans-title" data-v-f953d92f>한국어</p><!--[--><div class="VPMenuLink" data-v-f953d92f data-v-7eeeb2dc><a class="VPLink link" href="/en/getting-started.html" data-v-7eeeb2dc><!--[--><span data-v-7eeeb2dc>English</span><!--]--></a></div><!--]--></div><div class="group" data-v-f953d92f><div class="item appearance" data-v-f953d92f><p class="label" data-v-f953d92f>테마</p><div class="appearance-action" data-v-f953d92f><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-f953d92f data-v-be9742d9 data-v-b4ccac88><span class="check" data-v-b4ccac88><span class="icon" data-v-b4ccac88><!--[--><span class="vpi-sun sun" data-v-be9742d9></span><span class="vpi-moon moon" data-v-be9742d9></span><!--]--></span></span></button></div></div></div><div class="group" data-v-f953d92f><div class="item social-links" data-v-f953d92f><div class="VPSocialLinks social-links-list" data-v-f953d92f data-v-e71e869c><!--[--><a class="VPSocialLink no-icon" href="https://github.com/achieveonepark/InfinityValue" aria-label="github" target="_blank" rel="noopener" data-v-e71e869c data-v-60a9a2d3><span class="vpi-social-github"></span></a><!--]--></div></div></div><!--]--><!--]--></div></div></div><!--[--><!--]--><button type="button" class="VPNavBarHamburger hamburger" aria-label="mobile navigation" aria-expanded="false" aria-controls="VPNavScreen" data-v-9fd4d1dd data-v-6bee1efd><span class="container" data-v-6bee1efd><span class="top" data-v-6bee1efd></span><span class="middle" data-v-6bee1efd></span><span class="bottom" data-v-6bee1efd></span></span></button></div></div></div></div><div class="divider" data-v-9fd4d1dd><div class="divider-line" data-v-9fd4d1dd></div></div></div><!----></header><div class="VPLocalNav has-sidebar empty" data-v-d8b57b2d data-v-2488c25a><div class="container" data-v-2488c25a><button class="menu" aria-expanded="false" aria-controls="VPSidebarNav" data-v-2488c25a><span class="vpi-align-left menu-icon" data-v-2488c25a></span><span class="menu-text" data-v-2488c25a>메뉴</span></button><div class="VPLocalNavOutlineDropdown" style="--vp-vh:0px;" data-v-2488c25a data-v-6b867909><button data-v-6b867909>맨 위로</button><!----></div></div></div><aside class="VPSidebar" data-v-d8b57b2d data-v-42c4c606><div class="curtain" data-v-42c4c606></div><nav class="nav" id="VPSidebarNav" aria-labelledby="sidebar-aria-label" tabindex="-1" data-v-42c4c606><span class="visually-hidden" id="sidebar-aria-label" data-v-42c4c606> Sidebar Navigation </span><!--[--><!--]--><!--[--><div class="no-transition group" data-v-51288d80><section class="VPSidebarItem level-0 has-active" data-v-51288d80 data-v-0009425e><div class="item" role="button" tabindex="0" data-v-0009425e><div class="indicator" data-v-0009425e></div><h2 class="text" data-v-0009425e>가이드</h2><!----></div><div class="items" data-v-0009425e><!--[--><div class="VPSidebarItem level-1 is-link" data-v-0009425e data-v-0009425e><div class="item" data-v-0009425e><div class="indicator" data-v-0009425e></div><a class="VPLink link link" href="/" data-v-0009425e><!--[--><p class="text" data-v-0009425e>소개</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-0009425e data-v-0009425e><div class="item" data-v-0009425e><div class="indicator" data-v-0009425e></div><a class="VPLink link link" href="/installation.html" data-v-0009425e><!--[--><p class="text" data-v-0009425e>설치</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-0009425e data-v-0009425e><div class="item" data-v-0009425e><div class="indicator" data-v-0009425e></div><a class="VPLink link link" href="/getting-started.html" data-v-0009425e><!--[--><p class="text" data-v-0009425e>시작하기</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="no-transition group" data-v-51288d80><section class="VPSidebarItem level-0" data-v-51288d80 data-v-0009425e><div class="item" role="button" tabindex="0" data-v-0009425e><div class="indicator" data-v-0009425e></div><h2 class="text" data-v-0009425e>API 레퍼런스</h2><!----></div><div class="items" data-v-0009425e><!--[--><div class="VPSidebarItem level-1 is-link" data-v-0009425e data-v-0009425e><div class="item" data-v-0009425e><div class="indicator" data-v-0009425e></div><a class="VPLink link link" href="/api/" data-v-0009425e><!--[--><p class="text" data-v-0009425e>개요</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-0009425e data-v-0009425e><div class="item" data-v-0009425e><div class="indicator" data-v-0009425e></div><a class="VPLink link link" href="/api/constructors.html" data-v-0009425e><!--[--><p class="text" data-v-0009425e>생성자</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-0009425e data-v-0009425e><div class="item" data-v-0009425e><div class="indicator" data-v-0009425e></div><a class="VPLink link link" href="/api/operators.html" data-v-0009425e><!--[--><p class="text" data-v-0009425e>연산자</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-0009425e data-v-0009425e><div class="item" data-v-0009425e><div class="indicator" data-v-0009425e></div><a class="VPLink link link" href="/api/methods.html" data-v-0009425e><!--[--><p class="text" data-v-0009425e>메서드 & 프로퍼티</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-0009425e data-v-0009425e><div class="item" data-v-0009425e><div class="indicator" data-v-0009425e></div><a class="VPLink link link" href="/api/conversion.html" data-v-0009425e><!--[--><p class="text" data-v-0009425e>타입 변환</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="no-transition group" data-v-51288d80><section class="VPSidebarItem level-0" data-v-51288d80 data-v-0009425e><div class="item" role="button" tabindex="0" data-v-0009425e><div class="indicator" data-v-0009425e></div><h2 class="text" data-v-0009425e>고급</h2><!----></div><div class="items" data-v-0009425e><!--[--><div class="VPSidebarItem level-1 is-link" data-v-0009425e data-v-0009425e><div class="item" data-v-0009425e><div class="indicator" data-v-0009425e></div><a class="VPLink link link" href="/advanced/unit-names.html" data-v-0009425e><!--[--><p class="text" data-v-0009425e>커스텀 단위 이름</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-0009425e data-v-0009425e><div class="item" data-v-0009425e><div class="indicator" data-v-0009425e></div><a class="VPLink link link" href="/advanced/json.html" data-v-0009425e><!--[--><p class="text" data-v-0009425e>JSON 직렬화</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="no-transition group" data-v-51288d80><section class="VPSidebarItem level-0" data-v-51288d80 data-v-0009425e><!----><div class="items" data-v-0009425e><!--[--><div class="VPSidebarItem level-1 is-link" data-v-0009425e data-v-0009425e><div class="item" data-v-0009425e><div class="indicator" data-v-0009425e></div><a class="VPLink link link" href="/changelog.html" data-v-0009425e><!--[--><p class="text" data-v-0009425e>변경 이력</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><!--]--><!--[--><!--]--></nav></aside><div class="VPContent has-sidebar" id="VPContent" data-v-d8b57b2d data-v-9a6c75ad><div class="VPDoc has-sidebar has-aside" data-v-9a6c75ad data-v-e6f2a212><!--[--><!--]--><div class="container" data-v-e6f2a212><div class="aside" data-v-e6f2a212><div class="aside-curtain" data-v-e6f2a212></div><div class="aside-container" data-v-e6f2a212><div class="aside-content" data-v-e6f2a212><div class="VPDocAside" data-v-e6f2a212 data-v-cb998dce><!--[--><!--]--><!--[--><!--]--><nav aria-labelledby="doc-outline-aria-label" class="VPDocAsideOutline" data-v-cb998dce data-v-f610f197><div class="content" data-v-f610f197><div class="outline-marker" data-v-f610f197></div><div aria-level="2" class="outline-title" id="doc-outline-aria-label" role="heading" data-v-f610f197>이 페이지에서</div><ul class="VPDocOutlineItem root" data-v-f610f197 data-v-53c99d69><!--[--><!--]--></ul></div></nav><!--[--><!--]--><div class="spacer" data-v-cb998dce></div><!--[--><!--]--><!----><!--[--><!--]--><!--[--><!--]--></div></div></div></div><div class="content" data-v-e6f2a212><div class="content-container" data-v-e6f2a212><!--[--><!--]--><main class="main" data-v-e6f2a212><div style="position:relative;" class="vp-doc _getting-started" data-v-e6f2a212><div><h1 id="빠른-시작" tabindex="-1">빠른 시작 <a class="header-anchor" href="#빠른-시작" aria-label="Permalink to &quot;빠른 시작&quot;">​</a></h1><p><code>InfinityValue</code>를 게임에서 사용하는 가장 일반적인 패턴을 순서대로 설명합니다.</p><hr><h2 id="_1-네임스페이스-추가" tabindex="-1">1. 네임스페이스 추가 <a class="header-anchor" href="#_1-네임스페이스-추가" aria-label="Permalink to &quot;1. 네임스페이스 추가&quot;">​</a></h2><div class="language-csharp vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">csharp</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">using</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> Achieve</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span></code></pre></div><p>별도 초기화는 필요하지 않습니다. 기본 단위 체계(<code>A</code>, <code>B</code>, <code>C</code> … <code>CZ</code>)가 바로 사용 가능합니다.</p><p><code>K / M / B / T</code> 같은 단위를 선호한다면 앱 시작 시 한 번 설정하세요.</p><div class="language-csharp vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">csharp</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">void</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> Awake</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">()</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">{</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    InfinityValue.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">SetUnitNames</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> List</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&gt;</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    {</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">        &quot;&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;K&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;M&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;B&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;T&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;Qa&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;Qi&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;Sx&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;Sp&quot;</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    });</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span></code></pre></div><p>자세한 내용은 <a href="/advanced/unit-names.html">커스텀 단위 이름</a> 페이지를 참고하세요.</p><hr><h2 id="_2-값-생성하기" tabindex="-1">2. 값 생성하기 <a class="header-anchor" href="#_2-값-생성하기" aria-label="Permalink to &quot;2. 값 생성하기&quot;">​</a></h2><div class="language-csharp vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">csharp</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// 숫자 리터럴에서 생성 (암묵적 변환)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> gold</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 1_000L</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> score</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 3_500_000_000L</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// double 수식 결과에서 생성</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> xp</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 1.5e12</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// 저장된 문자열에서 생성 (PlayerPrefs 등)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> loaded</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> PlayerPrefs.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">GetString</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;gold&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;0&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// 오류 처리가 필요한 경우 TryParse 사용</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> (</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">!</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">InfinityValue.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">TryParse</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(PlayerPrefs.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">GetString</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;score&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">), </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">out</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> savedScore</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">))</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    savedScore </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> InfinityValue.Zero;</span></span></code></pre></div><hr><h2 id="_3-산술-연산" tabindex="-1">3. 산술 연산 <a class="header-anchor" href="#_3-산술-연산" aria-label="Permalink to &quot;3. 산술 연산&quot;">​</a></h2><div class="language-csharp vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">csharp</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> a</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 500_000L</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> b</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;300A&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;   </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// 300,000</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> sum</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> a </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">+</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> b;       </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// 800,000 → &quot;800&quot;</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> diff</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> b </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> a;       </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// 음수가 되면 0으로 클램프</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> mul</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> a </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">*</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 3L</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;      </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// 1,500,000 → &quot;1.50A&quot;</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> pct</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> a </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">*</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 1.25</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;    </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// 625,000  → &quot;625&quot;</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> div</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> a </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 2L</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;      </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// 250,000  → &quot;250&quot;</span></span></code></pre></div><blockquote><p>뺄셈은 결과가 음수가 될 경우 자동으로 0으로 클램프됩니다. 게임 내 자원 값에서 기대되는 동작입니다.</p></blockquote><hr><h2 id="_4-비교-연산" tabindex="-1">4. 비교 연산 <a class="header-anchor" href="#_4-비교-연산" aria-label="Permalink to &quot;4. 비교 연산&quot;">​</a></h2><div class="language-csharp vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">csharp</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> playerGold</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 5_000_000L</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> itemCost</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">   =</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;3A&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;      </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// 3,000,000</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> (playerGold </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">&gt;=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> itemCost)</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">{</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    playerGold </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">-=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> itemCost;</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    Debug.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">Log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;아이템 구매 완료! 잔여 골드: &quot;</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> +</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> playerGold); </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// &quot;2.00A&quot;</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span></code></pre></div><hr><h2 id="_5-값-표시하기" tabindex="-1">5. 값 표시하기 <a class="header-anchor" href="#_5-값-표시하기" aria-label="Permalink to &quot;5. 값 표시하기&quot;">​</a></h2><p><code>ToString()</code>은 <strong>가장 높은 단위</strong>를 기준으로 최대 소수 2자리까지 렌더링합니다.</p><table tabindex="0"><thead><tr><th>저장된 값</th><th>ToString() 출력</th></tr></thead><tbody><tr><td>500</td><td><code>&quot;500&quot;</code></td></tr><tr><td>1,500</td><td><code>&quot;1.50A&quot;</code></td></tr><tr><td>1,005,000</td><td><code>&quot;1.00B&quot;</code></td></tr><tr><td>5,300,000,000</td><td><code>&quot;5.30B&quot;</code></td></tr><tr><td>0</td><td><code>&quot;0&quot;</code></td></tr></tbody></table><div class="language-csharp vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">csharp</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> v</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 5_300_000_000L</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Debug.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">Log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(v.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ToString</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">()); </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// &quot;5.30B&quot;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// UI 텍스트에 바로 사용</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">goldText.text </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> playerGold.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ToString</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">();</span></span></code></pre></div><hr><h2 id="_6-저장-및-불러오기" tabindex="-1">6. 저장 및 불러오기 <a class="header-anchor" href="#_6-저장-및-불러오기" aria-label="Permalink to &quot;6. 저장 및 불러오기&quot;">​</a></h2><div class="language-csharp vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">csharp</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// 저장</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">PlayerPrefs.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">SetString</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;gold&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, playerGold.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ToString</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">());</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">PlayerPrefs.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">Save</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// 불러오기</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> (</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">!</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">InfinityValue.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">TryParse</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(PlayerPrefs.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">GetString</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;gold&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;0&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">), </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">out</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> InfinityValue</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> playerGold</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">))</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    playerGold </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> InfinityValue.Zero;</span></span></code></pre></div><blockquote><p><strong>다음:</strong> <a href="/api/">API 레퍼런스 →</a></p></blockquote></div></div></main><footer class="VPDocFooter" data-v-e6f2a212 data-v-1bcd8184><!--[--><!--]--><!----><nav class="prev-next" aria-labelledby="doc-footer-aria-label" data-v-1bcd8184><span class="visually-hidden" id="doc-footer-aria-label" data-v-1bcd8184>Pager</span><div class="pager" data-v-1bcd8184><a class="VPLink link pager-link prev" href="/installation.html" data-v-1bcd8184><!--[--><span class="desc" data-v-1bcd8184>이전 페이지</span><span class="title" data-v-1bcd8184>설치</span><!--]--></a></div><div class="pager" data-v-1bcd8184><a class="VPLink link pager-link next" href="/api/" data-v-1bcd8184><!--[--><span class="desc" data-v-1bcd8184>다음 페이지</span><span class="title" data-v-1bcd8184>개요</span><!--]--></a></div></nav></footer><!--[--><!--]--></div></div></div><!--[--><!--]--></div></div><!----><!--[--><!--]--></div></div>
+    <script>window.__VP_HASH_MAP__=JSON.parse("{\"advanced_json.md\":\"BHK7pgJi\",\"advanced_unit-names.md\":\"DRhQcd2j\",\"api_constructors.md\":\"DuqWY-bA\",\"api_conversion.md\":\"SL5fewIx\",\"api_index.md\":\"9fRJLL10\",\"api_methods.md\":\"Tvhc-t3o\",\"api_operators.md\":\"zlDFtJhk\",\"changelog.md\":\"BimMcs2-\",\"en_advanced_json.md\":\"CNq0YxSd\",\"en_advanced_unit-names.md\":\"DAG71_nr\",\"en_api_constructors.md\":\"CAlDLUn0\",\"en_api_conversion.md\":\"BjBsbCS-\",\"en_api_index.md\":\"CMfZj6Cu\",\"en_api_methods.md\":\"hqvVBudQ\",\"en_api_operators.md\":\"CASVQXTD\",\"en_changelog.md\":\"Dx1WK9rg\",\"en_getting-started.md\":\"4jxjB-OI\",\"en_index.md\":\"Cz9oVecu\",\"en_installation.md\":\"CZPZ1cdP\",\"getting-started.md\":\"By4VlEwT\",\"index.md\":\"ajcGKD-m\",\"installation.md\":\"BMlKyYV9\"}");window.__VP_SITE_DATA__=JSON.parse("{\"lang\":\"en-US\",\"dir\":\"ltr\",\"title\":\"Infinity Value\",\"description\":\"A VitePress site\",\"base\":\"/\",\"head\":[],\"router\":{\"prefetchLinks\":true},\"appearance\":true,\"themeConfig\":{\"socialLinks\":[{\"icon\":\"github\",\"link\":\"https://github.com/achieveonepark/InfinityValue\"}],\"search\":{\"provider\":\"local\"}},\"locales\":{\"root\":{\"label\":\"한국어\",\"lang\":\"ko-KR\",\"description\":\"유니티 방치형 게임을 위한 고성능 대형 숫자 구조체\",\"themeConfig\":{\"nav\":[{\"text\":\"가이드\",\"link\":\"/getting-started\"},{\"text\":\"API\",\"link\":\"/api/\"},{\"text\":\"변경 이력\",\"link\":\"/changelog\"}],\"sidebar\":{\"/\":[{\"text\":\"가이드\",\"items\":[{\"text\":\"소개\",\"link\":\"/\"},{\"text\":\"설치\",\"link\":\"/installation\"},{\"text\":\"시작하기\",\"link\":\"/getting-started\"}]},{\"text\":\"API 레퍼런스\",\"items\":[{\"text\":\"개요\",\"link\":\"/api/\"},{\"text\":\"생성자\",\"link\":\"/api/constructors\"},{\"text\":\"연산자\",\"link\":\"/api/operators\"},{\"text\":\"메서드 & 프로퍼티\",\"link\":\"/api/methods\"},{\"text\":\"타입 변환\",\"link\":\"/api/conversion\"}]},{\"text\":\"고급\",\"items\":[{\"text\":\"커스텀 단위 이름\",\"link\":\"/advanced/unit-names\"},{\"text\":\"JSON 직렬화\",\"link\":\"/advanced/json\"}]},{\"text\":\"변경 이력\",\"link\":\"/changelog\"}]},\"outline\":{\"label\":\"이 페이지에서\"},\"lastUpdated\":{\"text\":\"마지막 수정\"},\"docFooter\":{\"prev\":\"이전 페이지\",\"next\":\"다음 페이지\"},\"darkModeSwitchLabel\":\"테마\",\"sidebarMenuLabel\":\"메뉴\",\"returnToTopLabel\":\"맨 위로\"}},\"en\":{\"label\":\"English\",\"lang\":\"en-US\",\"description\":\"High-performance large number struct for Unity idle games\",\"themeConfig\":{\"nav\":[{\"text\":\"Guide\",\"link\":\"/en/getting-started\"},{\"text\":\"API\",\"link\":\"/en/api/\"},{\"text\":\"Changelog\",\"link\":\"/en/changelog\"}],\"sidebar\":{\"/en/\":[{\"text\":\"Guide\",\"items\":[{\"text\":\"Introduction\",\"link\":\"/en/\"},{\"text\":\"Installation\",\"link\":\"/en/installation\"},{\"text\":\"Getting Started\",\"link\":\"/en/getting-started\"}]},{\"text\":\"API Reference\",\"items\":[{\"text\":\"Overview\",\"link\":\"/en/api/\"},{\"text\":\"Constructors\",\"link\":\"/en/api/constructors\"},{\"text\":\"Operators\",\"link\":\"/en/api/operators\"},{\"text\":\"Methods & Properties\",\"link\":\"/en/api/methods\"},{\"text\":\"Type Conversions\",\"link\":\"/en/api/conversion\"}]},{\"text\":\"Advanced\",\"items\":[{\"text\":\"Custom Unit Names\",\"link\":\"/en/advanced/unit-names\"},{\"text\":\"JSON Serialization\",\"link\":\"/en/advanced/json\"}]},{\"text\":\"Changelog\",\"link\":\"/en/changelog\"}]}}}},\"scrollOffset\":134,\"cleanUrls\":false}");</script>
     
-            
-                
-                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
-                
-            
-        
-
-    
-
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    
-    <link rel="prev" href="installation.html" />
-    
-
-    </head>
-    <body>
-        
-<div class="book honkit-cloak">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="installation.html">
-            
-                <a href="installation.html">
-            
-                    
-                    Installation
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.3" data-path="getting-started.html">
-            
-                <a href="getting-started.html">
-            
-                    
-                    Getting Started
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" >
-            
-                <span>
-            
-                    
-                    API Reference
-            
-                </span>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="api/">
-            
-                <a href="api/">
-            
-                    
-                    Overview
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="api/constructors.html">
-            
-                <a href="api/constructors.html">
-            
-                    
-                    Constructors
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="api/operators.html">
-            
-                <a href="api/operators.html">
-            
-                    
-                    Operators
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="api/methods.html">
-            
-                <a href="api/methods.html">
-            
-                    
-                    Methods
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="api/conversion.html">
-            
-                <a href="api/conversion.html">
-            
-                    
-                    Type Conversions
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" >
-            
-                <span>
-            
-                    
-                    Advanced
-            
-                </span>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="advanced/unit-names.html">
-            
-                <a href="advanced/unit-names.html">
-            
-                    
-                    Custom Unit Names
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="advanced/json.html">
-            
-                <a href="advanced/json.html">
-            
-                    
-                    JSON Serialization
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="changelog.html">
-            
-                <a href="changelog.html">
-            
-                    
-                    Changelog
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
-            Published with HonKit
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Getting Started</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <h1 id="getting-started">Getting Started</h1>
-<p>This page walks through the most common patterns for using <code>InfinityValue</code> in a game.</p>
-<hr></hr>
-<h2 id="1-basic-setup">1. Basic Setup</h2>
-<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> Achieve.InfinityValue;
-</code></pre>
-<p>No additional initialization is required. The default unit system (<code>A</code>, <code>B</code>, <code>C</code> … <code>CZ</code>) is ready to use out of the box.</p>
-<p>If you prefer units like <code>K / M / B / T</code>, configure them once at startup:</p>
-<pre><code class="lang-csharp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Awake</span>()</span>
-{
-    InfinityValue.SetUnitNames(<span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt;
-    {
-        <span class="hljs-string">""</span>, <span class="hljs-string">"K"</span>, <span class="hljs-string">"M"</span>, <span class="hljs-string">"B"</span>, <span class="hljs-string">"T"</span>, <span class="hljs-string">"Qa"</span>, <span class="hljs-string">"Qi"</span>, <span class="hljs-string">"Sx"</span>, <span class="hljs-string">"Sp"</span>
-    });
-}
-</code></pre>
-<p>See <a href="advanced/unit-names.html">Custom Unit Names</a> for details.</p>
-<hr></hr>
-<h2 id="2-creating-values">2. Creating Values</h2>
-<pre><code class="lang-csharp"><span class="hljs-comment">// From numeric literals (implicit conversion)</span>
-InfinityValue gold  = <span class="hljs-number">1</span>_000L;
-InfinityValue score = <span class="hljs-number">3</span>_500_000_000L;
-
-<span class="hljs-comment">// From double (e.g. large values from formulas)</span>
-InfinityValue xp = <span class="hljs-number">1.5e12</span>;
-
-<span class="hljs-comment">// From a saved string (e.g. PlayerPrefs)</span>
-InfinityValue loaded = PlayerPrefs.GetString(<span class="hljs-string">"gold"</span>, <span class="hljs-string">"0"</span>);
-
-<span class="hljs-comment">// Safe parse with error handling</span>
-<span class="hljs-keyword">if</span> (!InfinityValue.TryParse(PlayerPrefs.GetString(<span class="hljs-string">"score"</span>), <span class="hljs-keyword">out</span> InfinityValue savedScore))
-    savedScore = InfinityValue.Zero;
-</code></pre>
-<hr></hr>
-<h2 id="3-arithmetic">3. Arithmetic</h2>
-<pre><code class="lang-csharp">InfinityValue a = <span class="hljs-number">500</span>_000L;
-InfinityValue b = <span class="hljs-string">"300A"</span>;   <span class="hljs-comment">// 300,000</span>
-
-InfinityValue sum  = a + b;       <span class="hljs-comment">// 800,000 → "800"</span>
-InfinityValue diff = b - a;       <span class="hljs-comment">// clamps to 0 if negative</span>
-InfinityValue mul  = a * <span class="hljs-number">3L</span>;      <span class="hljs-comment">// 1,500,000 → "1.50A"</span>
-InfinityValue pct  = a * <span class="hljs-number">1.25</span>;    <span class="hljs-comment">// 625,000  → "625"</span>
-InfinityValue div  = a / <span class="hljs-number">2L</span>;      <span class="hljs-comment">// 250,000  → "250"</span>
-</code></pre>
-<blockquote>
-<p>Subtraction never goes negative — it clamps to zero. This matches the expected behavior for resource values in games.</p>
-</blockquote>
-<hr></hr>
-<h2 id="4-comparisons">4. Comparisons</h2>
-<pre><code class="lang-csharp">InfinityValue playerGold = <span class="hljs-number">5</span>_000_000L;
-InfinityValue itemCost   = <span class="hljs-string">"3A"</span>;      <span class="hljs-comment">// 3,000,000</span>
-
-<span class="hljs-keyword">if</span> (playerGold &gt;= itemCost)
-{
-    playerGold -= itemCost;
-    Debug.Log(<span class="hljs-string">"Item purchased! Remaining: "</span> + playerGold); <span class="hljs-comment">// "2.00A"</span>
-}
-</code></pre>
-<hr></hr>
-<h2 id="5-displaying-values">5. Displaying Values</h2>
-<p><code>ToString()</code> renders the <strong>highest unit</strong> with up to 2 decimal places derived from the next lower unit:</p>
-<table>
-<thead>
-<tr>
-<th>Stored value</th>
-<th>ToString() output</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>500</td>
-<td><code>"500"</code></td>
-</tr>
-<tr>
-<td>1,500</td>
-<td><code>"1.50A"</code></td>
-</tr>
-<tr>
-<td>1,005,000</td>
-<td><code>"1.00B"</code></td>
-</tr>
-<tr>
-<td>5,300,000,000</td>
-<td><code>"5.30B"</code></td>
-</tr>
-<tr>
-<td>0</td>
-<td><code>"0"</code></td>
-</tr>
-</tbody>
-</table>
-<pre><code class="lang-csharp">InfinityValue v = <span class="hljs-number">5</span>_300_000_000L;
-Debug.Log(v.ToString()); <span class="hljs-comment">// "5.30B"</span>
-
-<span class="hljs-comment">// Use directly in UI</span>
-goldText.text = playerGold.ToString();
-</code></pre>
-<hr></hr>
-<h2 id="6-saving--loading">6. Saving &amp; Loading</h2>
-<pre><code class="lang-csharp"><span class="hljs-comment">// Save</span>
-PlayerPrefs.SetString(<span class="hljs-string">"gold"</span>, playerGold.ToString());
-
-<span class="hljs-comment">// Load</span>
-InfinityValue.TryParse(PlayerPrefs.GetString(<span class="hljs-string">"gold"</span>, <span class="hljs-string">"0"</span>), <span class="hljs-keyword">out</span> InfinityValue playerGold);
-</code></pre>
-<blockquote>
-<p><strong>Next:</strong> <a href="api/">API Reference →</a></p>
-</blockquote>
-
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
-
-                        </div>
-                    </div>
-                
-            </div>
-
-            
-                
-                <a href="installation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Installation">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-            
-        
-    </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Getting Started","level":"1.3","depth":1,"next":{"title":"API Reference","level":"1.4","depth":1,"ref":"","articles":[{"title":"Overview","level":"1.4.1","depth":2,"path":"api/README.md","ref":"api/README.md","articles":[]},{"title":"Constructors","level":"1.4.2","depth":2,"path":"api/constructors.md","ref":"api/constructors.md","articles":[]},{"title":"Operators","level":"1.4.3","depth":2,"path":"api/operators.md","ref":"api/operators.md","articles":[]},{"title":"Methods","level":"1.4.4","depth":2,"path":"api/methods.md","ref":"api/methods.md","articles":[]},{"title":"Type Conversions","level":"1.4.5","depth":2,"path":"api/conversion.md","ref":"api/conversion.md","articles":[]}]},"previous":{"title":"Installation","level":"1.2","depth":1,"path":"installation.md","ref":"installation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","-fontsettings","-livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"AchieveOne","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Infinity Value","language":"en","gitbook":"*","description":"High-performance large number struct for Unity idle games"},"file":{"path":"getting-started.md","mtime":"2026-05-23T23:18:12.500Z","type":"markdown"},"gitbook":{"version":"6.2.0","time":"2026-05-23T23:18:21.452Z"},"basePath":".","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <noscript>
-        <style>
-            .honkit-cloak {
-                display: block !important;
-            }
-        </style>
-    </noscript>
-    <script>
-        // Restore sidebar state as critical path for prevent layout shift
-        function __init__getSidebarState(defaultValue){
-            var baseKey = "";
-            var key = baseKey + ":sidebar";
-            try {
-                var value = localStorage[key];
-                if (value === undefined) {
-                    return defaultValue;
-                }
-                var parsed = JSON.parse(value);
-                return parsed == null ? defaultValue : parsed;
-            } catch (e) {
-                return defaultValue;
-            }
-        }
-        function __init__restoreLastSidebarState() {
-            var isMobile = window.matchMedia("(max-width: 600px)").matches;
-            if (isMobile) {
-                // Init last state if not mobile
-                return;
-            }
-            var sidebarState = __init__getSidebarState(true);
-            var book = document.querySelector(".book");
-            // Show sidebar if it enabled
-            if (sidebarState && book) {
-                book.classList.add("without-animation", "with-summary");
-            }
-        }
-
-        try {
-            __init__restoreLastSidebarState();
-        } finally {
-            var book = document.querySelector(".book");
-            book.classList.remove("honkit-cloak");
-        }
-    </script>
-    <script src="gitbook/gitbook.js"></script>
-    <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-
-    </body>
+  </body>
 </html>
-

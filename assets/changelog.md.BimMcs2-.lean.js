@@ -1,0 +1,1 @@
+import{c as o,Q as a,j as l,m as d}from"./chunks/framework.BPKcPtvA.js";const g=JSON.parse('{"title":"변경 이력","description":"","frontmatter":{},"headers":[],"relativePath":"changelog.md","filePath":"changelog.md"}'),t={name:"changelog.md"};function i(r,e,c,n,s,h){return a(),l("div",null,[...e[0]||(e[0]=[d("",14)])])}const m=o(t,[["render",i]]);export{g as __pageData,m as default};
