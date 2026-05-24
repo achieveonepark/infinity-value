@@ -1,40 +1,17 @@
-/* ── Hero ────────────────────────────────────────── */
-
-/* Add vertical gap between .name and .text in hero heading */
-.VPHero .heading {
-  gap: 12px;
+/* ── Hero: tagline에 줄바꿈 허용 ─────────────────── */
+.VPHero .tagline {
+  white-space: pre-wrap !important;
 }
 
-/* Tighten font size a little on small phones so title doesn't overflow */
-@media (max-width: 480px) {
-  .VPHero .name,
-  .VPHero .text {
-    font-size: 28px !important;
-    line-height: 36px !important;
-  }
+/* ── Mobile nav: 중복 언어 선택기 제거 ──────────── */
+/* VPNavBarExtra (768–1279px) 안의 locale 섹션 숨김  */
+.VPNavBarExtra .group.translations {
+  display: none !important;
 }
 
-/* ── Mobile nav: hide the duplicate locale switcher ─ */
-
-/*
- * VPNavBarExtra (visible 768–1280px) contains a locale section.
- * On screens where both the hamburger menu AND VPNavBarExtra appear,
- * the locale list shows twice. Hide it from the bar flyout on tablet.
- */
-@media (min-width: 768px) and (max-width: 1279px) {
-  .VPNavBarExtra .group.translations {
-    display: none;
-  }
-}
-
-/* ── vp-icons fallback ───────────────────────────── */
-
-/*
- * If the vp-icons font fails to load (e.g. CSP / Safari),
- * swap icon spans to visible Unicode fallbacks so the UI
- * doesn't show empty squares.
- */
-.vpi-sun::before    { content: '☀'; font-style: normal; }
-.vpi-moon::before   { content: '☾'; font-style: normal; }
-.vpi-languages::before { content: '🌐'; font-style: normal; }
+/* ── vp-icons 미로드 시 폴백 ─────────────────────  */
+.vpi-sun::before        { content: '○'; font-style: normal; }
+.vpi-moon::before       { content: '●'; font-style: normal; }
+.vpi-languages::before  { content: '언'; font-style: normal; font-size: 12px; }
 .vpi-chevron-down::before { content: '▾'; font-style: normal; }
+.vpi-more-horizontal::before { content: '···'; font-style: normal; }
