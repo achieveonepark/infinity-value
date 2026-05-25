@@ -1,0 +1,8 @@
+{
+  "title": "Infinity Value",
+  "description": "Large-number value type for Unity idle and incremental games.",
+  "structure": {
+    "readme": "README.md",
+    "summary": "SUMMARY.md"
+  }
+}

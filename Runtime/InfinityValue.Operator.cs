@@ -63,8 +63,8 @@ namespace Achieve.InfinityValue
         /// <summary>InfinityValue에 long 값을 곱합니다.</summary>
         public static InfinityValue operator *(InfinityValue a, long b)
         {
-            if (b == 0) return default;
-            var result = new InfinityValue();
+            if (b == 0) return Zero.WithUnitNames(a.UnitNames);
+            var result = default(InfinityValue).WithUnitNames(a.UnitNames);
             for (int i = 0; i < a._unitCount; i++)
             {
                 var unit = a.GetUnit(i);
@@ -77,8 +77,8 @@ namespace Achieve.InfinityValue
         /// <summary>InfinityValue에 double 값을 곱합니다. 소수 배율(예: 1.5배)에 유용합니다.</summary>
         public static InfinityValue operator *(InfinityValue a, double b)
         {
-            if (b <= 0) return default;
-            var result = new InfinityValue();
+            if (b <= 0) return Zero.WithUnitNames(a.UnitNames);
+            var result = default(InfinityValue).WithUnitNames(a.UnitNames);
             for (int i = 0; i < a._unitCount; i++)
             {
                 var unit = a.GetUnit(i);
@@ -93,7 +93,7 @@ namespace Achieve.InfinityValue
         {
             if (b == 0) throw new DivideByZeroException();
 
-            var result = new InfinityValue();
+            var result = default(InfinityValue).WithUnitNames(a.UnitNames);
             long remainder = 0;
 
             for (int i = a._unitCount - 1; i >= 0; i--)

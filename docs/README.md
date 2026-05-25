@@ -30,9 +30,17 @@ Debug.Log(gold.ToString()); // 5.30B
 - Optional Newtonsoft.Json converter when Unity's Newtonsoft package is installed.
 - Importable Unity samples under `Samples~`.
 
+## Documentation Structure
+
+This folder is both GitBook-friendly and VitePress-ready:
+
+- `README.md` is the GitBook landing page and VitePress home page.
+- `SUMMARY.md` is the GitBook table of contents.
+- `.vitepress/config.mts` reads `SUMMARY.md` to build the VitePress sidebar.
+
 ## Next Steps
 
 - [Getting Started](getting-started.md)
-- [API Reference](api/)
+- [API Reference](api/README.md)
 - [Unit Names](api/unit-names.md)
 - [Samples](samples.md)

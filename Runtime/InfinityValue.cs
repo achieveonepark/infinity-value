@@ -1,6 +1,7 @@
+#if USE_NEWTONSOFT_JSON
 using Newtonsoft.Json;
+#endif
 using System;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace Achieve.InfinityValue
@@ -21,8 +22,7 @@ namespace Achieve.InfinityValue
         // 현재 구조체에 저장된 활성 단위-값 쌍의 수 (0-8).
         private int _unitCount;
 
-        private static List<string> _unitNames;
-        private static Dictionary<string, int> _unitNameLookup;
+        private InfinityValueUnitNames _unitNames;
 
         /// <summary>0을 나타내는 InfinityValue입니다.</summary>
         public static readonly InfinityValue Zero = default;
@@ -33,40 +33,18 @@ namespace Achieve.InfinityValue
         /// <summary>현재 InfinityValue 인스턴스가 0 또는 비어있는 값을 나타내는지 여부를 가져옵니다.</summary>
         public bool IsEmpty => _unitCount == 0;
 
-        private static readonly string[] defaultUnitNames =
-        {
-            "", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-            "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
-            "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM",
-            "AN", "AO", "AP", "AQ", "AR", "AS", "AT", "AU", "AV", "AW", "AX", "AY", "AZ",
-            "BA", "BB", "BC", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BK", "BL", "BM",
-            "BN", "BO", "BP", "BQ", "BR", "BS", "BT", "BU", "BV", "BW", "BX", "BY", "BZ",
-            "CA", "CB", "CC", "CD", "CE", "CF", "CG", "CH", "CI", "CJ", "CK", "CL", "CM",
-            "CN", "CO", "CP", "CQ", "CR", "CS", "CT", "CU", "CV", "CW", "CX", "CY", "CZ",
-        };
-
-        static InfinityValue()
-        {
-            _unitNames = new List<string>(defaultUnitNames);
-            _unitNameLookup = BuildLookup(_unitNames);
-        }
-
-        private static Dictionary<string, int> BuildLookup(List<string> names)
-        {
-            var dict = new Dictionary<string, int>(names.Count);
-            for (int i = 0; i < names.Count; i++)
-                dict[names[i]] = i;
-            return dict;
-        }
+        /// <summary>현재 값이 문자열 변환과 파싱에 사용하는 단위 이름 집합입니다.</summary>
+        public InfinityValueUnitNames UnitNames => _unitNames ?? InfinityValueUnitNames.Default;
 
         /// <summary>
-        /// InfinityValue에 대한 사용자 지정 단위 이름을 설정합니다.
+        /// 같은 숫자 값을 유지하면서 표시/파싱 컨텍스트만 다른 단위 이름 집합으로 교체합니다.
         /// </summary>
-        /// <param name="unitNames">단위의 인덱스 순서대로 정렬된 문자열 표현 리스트입니다.</param>
-        public static void SetUnitNames(List<string> unitNames)
+        /// <param name="unitNames">이 값이 사용할 단위 이름 집합입니다.</param>
+        public InfinityValue WithUnitNames(InfinityValueUnitNames unitNames)
         {
-            _unitNames = unitNames;
-            _unitNameLookup = BuildLookup(unitNames);
+            var copy = this;
+            copy._unitNames = unitNames ?? InfinityValueUnitNames.Default;
+            return copy;
         }
 
         /// <summary>
@@ -78,12 +56,13 @@ namespace Achieve.InfinityValue
             if (_unitCount == 0) return "0";
 
             var highest = GetHighestUnit();
-            if (highest.Item1 >= _unitNames.Count) return "Infinity";
+            var unitNames = UnitNames;
+            if (highest.Item1 >= unitNames.Count) return "Infinity";
 
             if (highest.Item1 == 0)
                 return highest.Item2.ToString();
 
-            string suffix = _unitNames[highest.Item1];
+            string suffix = unitNames[highest.Item1];
             long nextVal = GetValueForIndex(highest.Item1 - 1);
             return $"{highest.Item2}.{(int)(nextVal / 10):D2}{suffix}";
         }

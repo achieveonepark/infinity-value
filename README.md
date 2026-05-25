@@ -1,125 +1,75 @@
 # Infinity Value
 
+Unity idle and incremental games often need values far beyond `long`. Infinity Value stores large numbers as compact unit segments and supports arithmetic, comparison, parsing, formatting, and optional JSON serialization.
+
 ## Install
 
-> Note: Check the version after `#` in the GitHub URL for the latest changes listed in the Changelog.
+Install from Unity Package Manager with a Git URL:
 
-### Install via Unity Package Manager (UPM)
-1. Open UPM and click the `+` button in the top left.
-2. Select **Install package from git URL...**
-3. Enter the following and click **Install**:
-```
-https://github.com/achieveonepark/InfinityValue.git#1.1.0
+```text
+https://github.com/achieveonepark/infinity-value.git
 ```
 
-### Manual Addition
-
-Open the `manifest.json` file in your Unity project's `Packages` folder and add the following line under `dependencies`:
+Or add it to `Packages/manifest.json`:
 
 ```json
-"com.achieve.infinity-value": "https://github.com/achieveonepark/InfinityValue.git#1.1.0"
+{
+  "dependencies": {
+    "com.achieve.infinity-value": "https://github.com/achieveonepark/infinity-value.git"
+  }
+}
 ```
 
----
-
-## Description
-
-A Unity-friendly struct for representing arbitrarily large numbers using segmented units (e.g. `"5.30B"`, `"120AA"`), designed for idle/incremental games.
-
-- Internally stores up to 8 `(unitIndex, value)` pairs — no heap allocation, no GC pressure.
-- All comparison and arithmetic operators supported with zero GC overhead.
-- `ToString()` renders the highest significant unit with 2 decimal places (e.g. `"5.30B"`, `"120.05AA"`).
-- Custom unit name systems supported via `SetUnitNames()`.
-- If the Newtonsoft.Json package is installed (`USE_NEWTONSOFT_JSON` define), a `JsonConverter` is automatically registered for seamless serialization.
-
----
-
-## Supported Constructors
-
-| Type | Example |
-|------|---------|
-| `int` | `new InfinityValue(1000)` |
-| `long` | `new InfinityValue(1_000_000L)` |
-| `float` | `new InfinityValue(3.0f)` |
-| `double` | `new InfinityValue(1.5e9)` |
-| `BigInteger` | `new InfinityValue(new BigInteger(...))` |
-| `string` | `new InfinityValue("300F 200C")` |
-
-All types also support **implicit conversion**:
-```csharp
-InfinityValue v = 1000L;
-InfinityValue v = 1.5e9;
-InfinityValue v = "300F 200C";
-```
-
----
-
-## Supported Operators
-
-| Category | Operators |
-|----------|-----------|
-| Arithmetic | `+`, `-`, `* long`, `* double`, `/ long`, `/ double` |
-| Comparison | `==`, `!=`, `<`, `>`, `<=`, `>=` (with `InfinityValue` and `long`) |
-| Conversion | `(long)`, `(float)`, `(double)` |
-
----
-
-## How to Use
+## Quick Start
 
 ```csharp
-using System.Collections.Generic;
-using System.Numerics;
 using Achieve.InfinityValue;
 
-// (Optional) Use custom unit names instead of the default A, B, C... system
-InfinityValue.SetUnitNames(new List<string>
+var goldUnits = new InfinityValueUnitNames(new[]
 {
-    "", "K", "M", "B", "T", "Qa", "Qi", "Sx"
+    "", "K", "M", "B", "T", "Qa", "Qi"
 });
 
-// Construction
-InfinityValue a = 1000;                          // from int
-InfinityValue b = "300F 200C";                   // from formatted string
-InfinityValue c = 3.0f;                          // from float
-InfinityValue d = 1.5e12;                        // from double
-InfinityValue e = new BigInteger(30_000_000_000_000L);
+InfinityValue gold = new InfinityValue(5_300_000_000L, goldUnits);
+InfinityValue reward = new InfinityValue("12K", goldUnits);
 
-// Safe string parsing
-if (InfinityValue.TryParse("500B 200A", out InfinityValue parsed))
-    Debug.Log(parsed); // "500.20B"
+gold += reward;
 
-// Arithmetic
-InfinityValue sum  = a + b;
-InfinityValue diff = b - a;  // clamps to zero if result would be negative
-InfinityValue mul  = b * 3L;
-InfinityValue pct  = b * 1.25;  // 25% increase
-InfinityValue div  = b / 2L;
-
-// Comparison
-bool isGreater = a > b;
-bool isZero    = a == InfinityValue.Zero;
-
-// Display — shows highest unit with 2 decimal places
-Debug.Log(e.ToString()); // e.g. "30.00B"
-Debug.Log(InfinityValue.Zero.ToString()); // "0"
-
-// Explicit conversion (approximate for large values)
-long   lv = (long)a;
-double dv = (double)e;
-
-// Static constants
-InfinityValue zero = InfinityValue.Zero;
-InfinityValue one  = InfinityValue.One;
+Debug.Log(gold.ToString()); // 5.30B
 ```
 
----
+## Features
 
-## Default Unit Names
+- Struct-based large number type for Unity runtime code.
+- Stores up to 8 `(unitIndex, value)` pairs.
+- Supports `+`, `-`, `*`, `/`, comparison operators, and primitive conversions.
+- Supports per-content unit names through `InfinityValueUnitNames`.
+- Supports safe parsing through `TryParse`.
+- Includes optional Newtonsoft.Json converter when Unity's Newtonsoft package is installed.
+- Includes Unity Package Manager samples in `Samples~`.
 
+## Constructors
+
+```csharp
+new InfinityValue(long number)
+new InfinityValue(long number, InfinityValueUnitNames unitNames)
+new InfinityValue(double number)
+new InfinityValue(double number, InfinityValueUnitNames unitNames)
+new InfinityValue(float number)
+new InfinityValue(float number, InfinityValueUnitNames unitNames)
+new InfinityValue(BigInteger number)
+new InfinityValue(BigInteger number, InfinityValueUnitNames unitNames)
+new InfinityValue(string input)
+new InfinityValue(string input, InfinityValueUnitNames unitNames)
 ```
-(none), A, B, C, ..., Z,
-AA, AB, ..., AZ,
-BA, BB, ..., BZ,
-CA, CB, ..., CZ
+
+## Parsing
+
+```csharp
+if (!InfinityValue.TryParse("5.30B", goldUnits, out var parsed))
+    parsed = InfinityValue.Zero.WithUnitNames(goldUnits);
 ```
-Total: 105 units (supports values up to 999 CZ ≈ 10^316).
+
+## Documentation
+
+The `docs` folder is built as VitePress and is also GitBook-friendly through `README.md` and `SUMMARY.md`.

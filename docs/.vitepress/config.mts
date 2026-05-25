@@ -1,109 +1,78 @@
+import { readFileSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
 
-const koSidebar = [
-  {
-    text: '가이드',
-    items: [
-      { text: '소개', link: '/' },
-      { text: '설치', link: '/installation' },
-      { text: '시작하기', link: '/getting-started' },
-    ],
-  },
-  {
-    text: 'API 레퍼런스',
-    items: [
-      { text: '개요', link: '/api/' },
-      { text: '생성자', link: '/api/constructors' },
-      { text: '연산자', link: '/api/operators' },
-      { text: '메서드 & 프로퍼티', link: '/api/methods' },
-      { text: '타입 변환', link: '/api/conversion' },
-    ],
-  },
-  {
-    text: '고급',
-    items: [
-      { text: '커스텀 단위 이름', link: '/advanced/unit-names' },
-      { text: 'JSON 직렬화', link: '/advanced/json' },
-    ],
-  },
-  { text: '변경 이력', link: '/changelog' },
-]
+type SidebarItem = {
+  text: string
+  link?: string
+  items?: SidebarItem[]
+}
 
-const enSidebar = [
-  {
-    text: 'Guide',
-    items: [
-      { text: 'Introduction', link: '/en/' },
-      { text: 'Installation', link: '/en/installation' },
-      { text: 'Getting Started', link: '/en/getting-started' },
-    ],
-  },
-  {
-    text: 'API Reference',
-    items: [
-      { text: 'Overview', link: '/en/api/' },
-      { text: 'Constructors', link: '/en/api/constructors' },
-      { text: 'Operators', link: '/en/api/operators' },
-      { text: 'Methods & Properties', link: '/en/api/methods' },
-      { text: 'Type Conversions', link: '/en/api/conversion' },
-    ],
-  },
-  {
-    text: 'Advanced',
-    items: [
-      { text: 'Custom Unit Names', link: '/en/advanced/unit-names' },
-      { text: 'JSON Serialization', link: '/en/advanced/json' },
-    ],
-  },
-  { text: 'Changelog', link: '/en/changelog' },
-]
+const docsRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+
+function toVitePressLink(href: string): string {
+  let link = href.replace(/\\/g, '/').replace(/\.md$/, '')
+
+  if (link === 'README') return '/'
+  if (link.endsWith('/README')) link = link.slice(0, -'/README'.length) || '/'
+  if (!link.startsWith('/')) link = `/${link}`
+
+  return link
+}
+
+function buildSidebar(): SidebarItem[] {
+  const summary = readFileSync(resolve(docsRoot, 'SUMMARY.md'), 'utf8')
+  const sidebar: SidebarItem[] = []
+  const stack: Array<{ level: number; item: SidebarItem }> = []
+
+  for (const line of summary.split(/\r?\n/)) {
+    const match = line.match(/^(\s*)[*-]\s+\[([^\]]+)\]\(([^)]+)\)/)
+    if (!match) continue
+
+    const level = Math.floor(match[1].replace(/\t/g, '  ').length / 2)
+    const item: SidebarItem = {
+      text: match[2],
+      link: toVitePressLink(match[3]),
+    }
+
+    while (stack.length > 0 && stack[stack.length - 1].level >= level) {
+      stack.pop()
+    }
+
+    if (stack.length === 0) {
+      sidebar.push(item)
+    } else {
+      const parent = stack[stack.length - 1].item
+      parent.items ??= []
+      parent.items.push(item)
+    }
+
+    stack.push({ level, item })
+  }
+
+  return sidebar
+}
 
 export default defineConfig({
   title: 'Infinity Value',
-
-  head: [
-    ['script', {}, `if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js')`],
-  ],
-
-  locales: {
-    root: {
-      label: '한국어',
-      lang: 'ko-KR',
-      description: '유니티 방치형 게임을 위한 고성능 대형 숫자 구조체',
-      themeConfig: {
-        nav: [
-          { text: '가이드', link: '/getting-started' },
-          { text: 'API', link: '/api/' },
-          { text: '변경 이력', link: '/changelog' },
-        ],
-        sidebar: { '/': koSidebar },
-        outline: { label: '이 페이지에서' },
-        lastUpdated: { text: '마지막 수정' },
-        docFooter: { prev: '이전 페이지', next: '다음 페이지' },
-        darkModeSwitchLabel: '테마',
-        sidebarMenuLabel: '메뉴',
-        returnToTopLabel: '맨 위로',
-      },
-    },
-    en: {
-      label: 'English',
-      lang: 'en-US',
-      description: 'High-performance large number struct for Unity idle games',
-      themeConfig: {
-        nav: [
-          { text: 'Guide', link: '/en/getting-started' },
-          { text: 'API', link: '/en/api/' },
-          { text: 'Changelog', link: '/en/changelog' },
-        ],
-        sidebar: { '/en/': enSidebar },
-      },
-    },
-  },
+  description: 'Large-number value type for Unity idle and incremental games.',
+  base: '/',
+  cleanUrls: false,
+  lastUpdated: false,
+  srcExclude: ['README.md', '**/README.md', 'SUMMARY.md'],
 
   themeConfig: {
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/achieveonepark/InfinityValue' },
+    nav: [
+      { text: 'Guide', link: '/getting-started' },
+      { text: 'API', link: '/api/' },
+      { text: 'Samples', link: '/samples' },
+      { text: 'Changelog', link: '/changelog' },
     ],
+    sidebar: buildSidebar(),
     search: { provider: 'local' },
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/achieveonepark/infinity-value' },
+    ],
   },
 })
