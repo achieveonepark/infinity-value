@@ -35,4 +35,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/.vitepress/dist
           cname: somiri.dev
+          keep_files: true
           commit_message: 'docs: deploy ${{ github.sha }}'
