@@ -15,7 +15,7 @@ function toVitePressLink(href: string): string {
   let link = href.replace(/\\/g, '/').replace(/\.md$/, '')
 
   if (link === 'README') return '/'
-  if (link.endsWith('/README')) link = link.slice(0, -'/README'.length) || '/'
+  if (link.endsWith('/README')) link = `${link.slice(0, -'/README'.length)}/`
   if (!link.startsWith('/')) link = `/${link}`
 
   return link
@@ -61,6 +61,19 @@ export default defineConfig({
   cleanUrls: false,
   lastUpdated: false,
   srcExclude: ['README.md', '**/README.md', 'SUMMARY.md'],
+  head: [
+    [
+      'script',
+      {},
+      `if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations()
+    .then(registrations => Promise.all(registrations.map(registration => registration.unregister())))
+    .then(() => caches && caches.keys ? caches.keys() : [])
+    .then(keys => Promise.all(keys.map(key => caches.delete(key))))
+    .catch(() => {})
+}`,
+    ],
+  ],
 
   themeConfig: {
     nav: [
