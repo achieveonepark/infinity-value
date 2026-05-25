@@ -61,6 +61,10 @@ const enSidebar = [
 export default defineConfig({
   title: 'Infinity Value',
 
+  head: [
+    ['script', {}, `if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js')`],
+  ],
+
   locales: {
     root: {
       label: '한국어',
