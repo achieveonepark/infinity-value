@@ -1,3 +1,9 @@
+---
+id: samples
+title: Unity Samples
+sidebar_position: 3
+---
+
 # Unity Samples
 
 The package includes importable samples through Unity Package Manager.

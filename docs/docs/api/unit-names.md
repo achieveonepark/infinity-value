@@ -1,3 +1,9 @@
+---
+id: unit-names
+title: Unit Names
+sidebar_position: 2
+---
+
 # Unit Names
 
 `InfinityValueUnitNames` is an instance object. It replaces the old global configuration style and lets each content system own its own suffix table.

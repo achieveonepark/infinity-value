@@ -1,3 +1,9 @@
+---
+id: json
+title: JSON
+sidebar_position: 3
+---
+
 # JSON
 
 When Unity's `com.unity.nuget.newtonsoft-json` package is installed, `InfinityValue` is decorated with `InfinityValueConverter`.
