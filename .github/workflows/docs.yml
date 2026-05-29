@@ -36,8 +36,8 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Build documentation
-        run: npm run build
+      - name: Build documentation (all locales)
+        run: npm run build -- --locale en --locale ko --locale ja --locale zh-Hans
         working-directory: docs
 
       - name: Upload Pages artifact

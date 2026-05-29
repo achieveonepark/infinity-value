@@ -22,7 +22,13 @@ const config: Config = {
 
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'ko', 'ja', 'zh-Hans'],
+    localeConfigs: {
+      en: { label: 'English' },
+      ko: { label: '한국어' },
+      ja: { label: '日本語' },
+      'zh-Hans': { label: '中文（简体）' },
+    },
   },
 
   presets: [
@@ -66,6 +72,10 @@ const config: Config = {
           to: '/docs/changelog',
           position: 'left',
           label: 'Changelog',
+        },
+        {
+          type: 'localeDropdown',
+          position: 'right',
         },
         {
           href: 'https://github.com/achieveonepark/infinity-value',
