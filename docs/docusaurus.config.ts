@@ -7,8 +7,8 @@ const config: Config = {
   tagline: 'Large-number value type for Unity idle and incremental games.',
   favicon: undefined,
 
-  url: 'https://somiri.dev',
-  baseUrl: '/',
+  url: 'https://achieveonepark.github.io',
+  baseUrl: '/infinity-value/',
 
   organizationName: 'achieveonepark',
   projectName: 'infinity-value',
