@@ -1,0 +1,95 @@
+---
+id: index
+title: API リファレンス
+sidebar_position: 1
+---
+
+# API リファレンス
+
+## 主要な型
+
+| 型 | 目的 |
+| --- | --- |
+| `InfinityValue` | 大きな数値の値型 |
+| `InfinityValueUnitNames` | パースと表示のためのインスタンス単位サフィックステーブル |
+| `InfinityValueConverter` | オプションの Newtonsoft.Json コンバーター |
+
+## コンストラクター
+
+```csharp
+new InfinityValue(long number)
+new InfinityValue(long number, InfinityValueUnitNames unitNames)
+
+new InfinityValue(double number)
+new InfinityValue(double number, InfinityValueUnitNames unitNames)
+
+new InfinityValue(float number)
+new InfinityValue(float number, InfinityValueUnitNames unitNames)
+
+new InfinityValue(BigInteger number)
+new InfinityValue(BigInteger number, InfinityValueUnitNames unitNames)
+
+new InfinityValue(string input)
+new InfinityValue(string input, InfinityValueUnitNames unitNames)
+```
+
+## 静的な値
+
+```csharp
+InfinityValue.Zero
+InfinityValue.One
+```
+
+カスタム単位コンテキストが必要な場合は `WithUnitNames` を使用します:
+
+```csharp
+InfinityValue zeroGold = InfinityValue.Zero.WithUnitNames(goldUnits);
+```
+
+## パース
+
+```csharp
+InfinityValue.TryParse(string input, out InfinityValue result)
+InfinityValue.TryParse(string input, InfinityValueUnitNames unitNames, out InfinityValue result)
+```
+
+## インスタンスメンバー
+
+```csharp
+bool IsEmpty { get; }
+InfinityValueUnitNames UnitNames { get; }
+InfinityValue WithUnitNames(InfinityValueUnitNames unitNames)
+string ToString()
+int CompareTo(InfinityValue other)
+bool Equals(InfinityValue other)
+int GetHashCode()
+```
+
+## 演算子
+
+```csharp
+a + b
+a - b
+a * 10L
+a * 1.5
+a / 2L
+a / 2.0
+
+a == b
+a != b
+a < b
+a > b
+a <= b
+a >= b
+```
+
+## 変換
+
+```csharp
+InfinityValue value = 1000;
+InfinityValue parsed = "500A";
+
+long asLong = (long)value;
+double asDouble = (double)value;
+float asFloat = (float)value;
+```
