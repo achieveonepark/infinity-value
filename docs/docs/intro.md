@@ -1,3 +1,9 @@
+---
+id: intro
+title: Introduction
+sidebar_position: 1
+---
+
 # Infinity Value
 
 Infinity Value is a Unity package for idle and incremental games that need numbers far beyond `long`.
@@ -33,6 +39,6 @@ Debug.Log(gold.ToString()); // 5.30B
 ## Next Steps
 
 - [Getting Started](getting-started.md)
-- [API Reference](api/)
+- [API Reference](api/index.md)
 - [Unit Names](api/unit-names.md)
 - [Samples](samples.md)
