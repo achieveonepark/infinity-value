@@ -1,0 +1,84 @@
+---
+title: "getting-started"
+---
+
+---
+id: getting-started
+title: Getting Started
+sidebar_position: 2
+---
+
+# Getting Started
+
+## Install
+
+Add the package through Unity Package Manager:
+
+```text
+https://github.com/achieveonepark/infinity-value.git
+```
+
+Or add it to `Packages/manifest.json`:
+
+```json
+{
+  "dependencies": {
+    "com.achieve.infinity-value": "https://github.com/achieveonepark/infinity-value.git"
+  }
+}
+```
+
+## Create Values
+
+```csharp
+using Achieve.InfinityValue;
+
+InfinityValue a = 1000;
+InfinityValue b = new InfinityValue(1_500_000L);
+InfinityValue c = new InfinityValue(1.5e12);
+InfinityValue d = new InfinityValue("300B 200A");
+```
+
+## Use Per-Content Unit Names
+
+Use `InfinityValueUnitNames` when different systems need different suffixes.
+
+```csharp
+var currencyUnits = new InfinityValueUnitNames(new[]
+{
+    "", "K", "M", "B", "T", "Qa", "Qi"
+});
+
+var damageUnits = new InfinityValueUnitNames(new[]
+{
+    "", "a", "b", "c", "d", "e", "f"
+});
+
+InfinityValue gold = new InfinityValue("12K", currencyUnits);
+InfinityValue damage = new InfinityValue("12a", damageUnits);
+```
+
+Each `InfinityValue` carries the unit name instance that was passed to it. Arithmetic keeps the left-hand value's unit names:
+
+```csharp
+InfinityValue totalGold = gold + new InfinityValue(5000, currencyUnits);
+Debug.Log(totalGold); // 17.00K
+```
+
+## Parse Safely
+
+```csharp
+if (!InfinityValue.TryParse("5B", currencyUnits, out var parsed))
+    parsed = InfinityValue.Zero.WithUnitNames(currencyUnits);
+```
+
+## Save And Load
+
+The simplest persistence format is the display string plus the same unit name set on load:
+
+```csharp
+PlayerPrefs.SetString("gold", gold.ToString());
+
+string raw = PlayerPrefs.GetString("gold", "0");
+InfinityValue.TryParse(raw, currencyUnits, out gold);
+```

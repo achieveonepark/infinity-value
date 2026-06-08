@@ -1,0 +1,44 @@
+---
+title: "json"
+---
+
+---
+id: json
+title: JSON
+sidebar_position: 3
+---
+
+# JSON
+
+When Unity's `com.unity.nuget.newtonsoft-json` package is installed, `InfinityValue` is decorated with `InfinityValueConverter`.
+
+The converter stores values as strings:
+
+```json
+{
+  "gold": "5.30B"
+}
+```
+
+## Example
+
+```csharp
+using Achieve.InfinityValue;
+using Newtonsoft.Json;
+
+public sealed class SaveData
+{
+    public InfinityValue Gold;
+}
+
+var units = new InfinityValueUnitNames(new[] { "", "K", "M", "B" });
+var save = new SaveData
+{
+    Gold = new InfinityValue("5B", units)
+};
+
+string json = JsonConvert.SerializeObject(save);
+SaveData loaded = JsonConvert.DeserializeObject<SaveData>(json);
+```
+
+The default converter reconstructs values with the default unit names. If a save file uses custom unit names, store enough content metadata to choose the correct `InfinityValueUnitNames` when loading gameplay data.

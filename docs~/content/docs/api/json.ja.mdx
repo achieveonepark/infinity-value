@@ -1,0 +1,44 @@
+---
+title: "json"
+---
+
+---
+id: json
+title: JSON
+sidebar_position: 3
+---
+
+# JSON
+
+Unity の `com.unity.nuget.newtonsoft-json` パッケージがインストールされている場合、`InfinityValue` には `InfinityValueConverter` が適用されます。
+
+コンバーターは値を文字列として保存します:
+
+```json
+{
+  "gold": "5.30B"
+}
+```
+
+## 例
+
+```csharp
+using Achieve.InfinityValue;
+using Newtonsoft.Json;
+
+public sealed class SaveData
+{
+    public InfinityValue Gold;
+}
+
+var units = new InfinityValueUnitNames(new[] { "", "K", "M", "B" });
+var save = new SaveData
+{
+    Gold = new InfinityValue("5B", units)
+};
+
+string json = JsonConvert.SerializeObject(save);
+SaveData loaded = JsonConvert.DeserializeObject<SaveData>(json);
+```
+
+デフォルトのコンバーターはデフォルトの単位名で値を復元します。セーブファイルがカスタム単位名を使用する場合は、ゲームプレイデータのロード時に正しい `InfinityValueUnitNames` を選択できるよう、十分なコンテンツメタデータを一緒に保存してください。

@@ -1,4 +1,13 @@
-node_modules
-build
-.docusaurus
-.cache-loader
+# Next.js / Fumadocs
+node_modules/
+.next/
+out/
+.source/
+next-env.d.ts
+
+# OS / logs
+.DS_Store
+*.log
+.env.local
+.env.*.local
+npm-debug.log*
