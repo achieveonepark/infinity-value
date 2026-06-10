@@ -1,17 +1,16 @@
 ---
-title: 시작하기
-description: Infinity Value 설치와 값 생성·연산·파싱·저장
+title: "Getting Started"
 ---
 
-## 설치
+## Install
 
-Unity Package Manager로 패키지를 추가합니다.
+Add the package through Unity Package Manager:
 
 ```text
 https://github.com/achieveonepark/infinity-value.git
 ```
 
-또는 `Packages/manifest.json`에 추가합니다.
+Or add it to `Packages/manifest.json`:
 
 ```json
 {
@@ -21,7 +20,7 @@ https://github.com/achieveonepark/infinity-value.git
 }
 ```
 
-## 값 생성
+## Create Values
 
 ```csharp
 using Achieve.InfinityValue;
@@ -32,9 +31,9 @@ InfinityValue c = new InfinityValue(1.5e12);
 InfinityValue d = new InfinityValue("300B 200A");
 ```
 
-## 콘텐츠별 단위 이름 사용
+## Use Per-Content Unit Names
 
-시스템마다 다른 접미사가 필요할 때 `InfinityValueUnitNames`를 사용합니다.
+Use `InfinityValueUnitNames` when different systems need different suffixes.
 
 ```csharp
 var currencyUnits = new InfinityValueUnitNames(new[]
@@ -51,23 +50,23 @@ InfinityValue gold = new InfinityValue("12K", currencyUnits);
 InfinityValue damage = new InfinityValue("12a", damageUnits);
 ```
 
-각 `InfinityValue`는 전달받은 단위 이름 인스턴스를 그대로 가집니다. 산술 연산은 왼쪽 값의 단위 이름을 유지합니다.
+Each `InfinityValue` carries the unit name instance that was passed to it. Arithmetic keeps the left-hand value's unit names:
 
 ```csharp
 InfinityValue totalGold = gold + new InfinityValue(5000, currencyUnits);
 Debug.Log(totalGold); // 17.00K
 ```
 
-## 안전한 파싱
+## Parse Safely
 
 ```csharp
 if (!InfinityValue.TryParse("5B", currencyUnits, out var parsed))
     parsed = InfinityValue.Zero.WithUnitNames(currencyUnits);
 ```
 
-## 저장과 로드
+## Save And Load
 
-가장 간단한 영속화 방식은 표시 문자열을 저장하고, 로드 시 같은 단위 이름 세트로 파싱하는 것입니다.
+The simplest persistence format is the display string plus the same unit name set on load:
 
 ```csharp
 PlayerPrefs.SetString("gold", gold.ToString());

@@ -1,24 +1,25 @@
 ---
-title: "Changelog"
+title: 변경 내역
+description: Infinity Value 버전별 변경 내역
 ---
 
 ## Unreleased
 
-- Rebuilt documentation as Docusaurus site.
-- Added `InfinityValueUnitNames` for per-content unit name instances.
-- Added constructor and `TryParse` overloads that accept `InfinityValueUnitNames`.
-- Added Unity Package Manager samples under `Samples~`.
+- 콘텐츠별 단위 이름 인스턴스를 위한 `InfinityValueUnitNames` 추가
+- `InfinityValueUnitNames`를 받는 생성자와 `TryParse` 오버로드 추가
+- `5.30B` 같은 컴팩트 소수 문자열 파싱 수정
+- `Samples~` 하위에 Unity Package Manager 샘플 추가
 
 ## 1.1.0 — 2026-05-23
 
-- Fixed semantic equality and hashing for values with different internal slot order.
-- Fixed subtraction borrow behavior and negative-result clamping.
-- Added `TryParse`, `Zero`, `One`, double operations, and double conversion.
+- 내부 슬롯 순서가 달라도 의미상 동일한 값의 동등성·해싱이 올바르게 동작하도록 수정
+- 뺄셈의 borrow 동작과 음수 결과의 0 클램핑 수정
+- `TryParse`, `Zero`, `One`, double 연산 및 double 변환 추가
 
 ## 1.0.1 — 2026-01-04
 
-- Reduced GC pressure through internal structural optimizations.
+- 내부 구조 최적화로 GC 부담 감소
 
 ## 1.0.0 — 2024-09-17
 
-- Initial release.
+- 첫 릴리스

@@ -1,10 +1,11 @@
 ---
-title: "JSON"
+title: JSON
+description: Newtonsoft.Json 컨버터로 InfinityValue 직렬화
 ---
 
-When Unity's `com.unity.nuget.newtonsoft-json` package is installed, `InfinityValue` is decorated with `InfinityValueConverter`.
+Unity의 `com.unity.nuget.newtonsoft-json` 패키지가 설치되어 있으면 `InfinityValue`에 `InfinityValueConverter`가 적용됩니다.
 
-The converter stores values as strings:
+컨버터는 값을 문자열로 저장합니다.
 
 ```json
 {
@@ -12,7 +13,7 @@ The converter stores values as strings:
 }
 ```
 
-## Example
+## 예시
 
 ```csharp
 using Achieve.InfinityValue;
@@ -33,4 +34,4 @@ string json = JsonConvert.SerializeObject(save);
 SaveData loaded = JsonConvert.DeserializeObject<SaveData>(json);
 ```
 
-The default converter reconstructs values with the default unit names. If a save file uses custom unit names, store enough content metadata to choose the correct `InfinityValueUnitNames` when loading gameplay data.
+기본 컨버터는 기본 단위 이름으로 값을 복원합니다. 저장 파일이 커스텀 단위 이름을 사용한다면, 게임 데이터를 로드할 때 올바른 `InfinityValueUnitNames`를 선택할 수 있도록 충분한 콘텐츠 메타데이터를 함께 저장하세요.

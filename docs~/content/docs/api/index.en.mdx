@@ -1,17 +1,16 @@
 ---
-title: API 레퍼런스
-description: InfinityValue 주요 타입, 생성자, 연산자, 변환
+title: "API Reference"
 ---
 
-## 주요 타입
+## Main Types
 
-| 타입 | 용도 |
+| Type | Purpose |
 | --- | --- |
-| `InfinityValue` | 큰 수 값 타입 |
-| `InfinityValueUnitNames` | 파싱·표시에 쓰이는 인스턴스 단위 접미사 테이블 |
-| `InfinityValueConverter` | 선택적 Newtonsoft.Json 컨버터 |
+| `InfinityValue` | Large-number value type. |
+| `InfinityValueUnitNames` | Instance-owned unit suffix table for parsing and display. |
+| `InfinityValueConverter` | Optional Newtonsoft.Json converter. |
 
-## 생성자
+## Constructors
 
 ```csharp
 new InfinityValue(long number)
@@ -30,27 +29,27 @@ new InfinityValue(string input)
 new InfinityValue(string input, InfinityValueUnitNames unitNames)
 ```
 
-## 정적 값
+## Static Values
 
 ```csharp
 InfinityValue.Zero
 InfinityValue.One
 ```
 
-Zero 또는 One 값에 커스텀 단위 컨텍스트를 부여하려면 `WithUnitNames`를 사용합니다.
+Use `WithUnitNames` when a zero or one value should carry a custom unit context:
 
 ```csharp
 InfinityValue zeroGold = InfinityValue.Zero.WithUnitNames(goldUnits);
 ```
 
-## 파싱
+## Parsing
 
 ```csharp
 InfinityValue.TryParse(string input, out InfinityValue result)
 InfinityValue.TryParse(string input, InfinityValueUnitNames unitNames, out InfinityValue result)
 ```
 
-## 인스턴스 멤버
+## Instance Members
 
 ```csharp
 bool IsEmpty { get; }
@@ -62,7 +61,7 @@ bool Equals(InfinityValue other)
 int GetHashCode()
 ```
 
-## 연산자
+## Operators
 
 ```csharp
 a + b
@@ -80,7 +79,7 @@ a <= b
 a >= b
 ```
 
-## 변환
+## Conversions
 
 ```csharp
 InfinityValue value = 1000;

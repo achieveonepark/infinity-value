@@ -1,7 +1,4 @@
 {
-  "pages": [
-    "index",
-    "json",
-    "unit-names"
-  ]
+  "title": "API",
+  "pages": ["index", "unit-names", "json"]
 }
