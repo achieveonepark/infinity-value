@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v1.2.0 - 2026.06.14
+
 - Added `InfinityValueUnitNames` for per-content unit name instances.
 - Added constructor and `TryParse` overloads that accept `InfinityValueUnitNames`.
 - Fixed parsing for compact decimal strings such as `5.30B`.

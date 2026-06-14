@@ -4,6 +4,35 @@ Unity idle and incremental games often need values far beyond `long`. Infinity V
 
 ## Install
 
+### OpenUPM
+
+After the package is accepted and published on OpenUPM, install it with the OpenUPM CLI:
+
+```bash
+openupm add com.achieve.infinity-value
+```
+
+Or add the OpenUPM scoped registry manually in `Packages/manifest.json`:
+
+```json
+{
+  "scopedRegistries": [
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.achieve"
+      ]
+    }
+  ],
+  "dependencies": {
+    "com.achieve.infinity-value": "1.2.0"
+  }
+}
+```
+
+### Git URL
+
 Install from Unity Package Manager with a Git URL:
 
 ```text

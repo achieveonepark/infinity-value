@@ -2,18 +2,19 @@
   "name": "com.achieve.infinity-value",
   "displayName": "Infinity Value",
   "author": "Achieveone",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "unity": "2022.3",
-  "description": "It is a structure that sets custom units commonly used in unattended RPGs so that they have infinite numbers.",
+  "description": "Large-number value type for Unity idle and incremental games, with compact unit formatting, parsing, arithmetic, comparison, and optional JSON serialization.",
+  "license": "MIT",
   "keywords": [
-    "Data",
-    "Table"
+    "large-number",
+    "big-number",
+    "idle-game",
+    "incremental-game",
+    "number-formatting"
   ],
-  "dependencies": {
-    "com.unity.test-framework": "1.0.16"
-  },
-  "documentationUrl": "https://somiri.dev/",
-  "changelogUrl": "https://github.com/achieveonepark/infinity-value/blob/main/CHANGELOG.md",
+  "documentationUrl": "docs.somiri.dev/infinity-value",
+  "changelogUrl": "https://docs.somiri.dev/infinity-value/ko/changelog",
   "repository": {
     "url": "https://github.com/achieveonepark/infinity-value",
     "type": "git"
@@ -36,6 +37,6 @@
     }
   ],
   "_upm": {
-    "changelog": "## Added\n- Package release"
+    "changelog": "## Added\n- Added OpenUPM-ready package metadata and installation documentation.\n- Added Unity Package Manager samples under Samples~.\n- Added per-content unit name support and compact decimal parsing improvements."
   }
 }
