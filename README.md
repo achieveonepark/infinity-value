@@ -98,7 +98,3 @@ new InfinityValue(string input, InfinityValueUnitNames unitNames)
 if (!InfinityValue.TryParse("5.30B", goldUnits, out var parsed))
     parsed = InfinityValue.Zero.WithUnitNames(goldUnits);
 ```
-
-## Documentation
-
-The `docs` folder is built as VitePress and is also GitBook-friendly through `README.md` and `SUMMARY.md`.
