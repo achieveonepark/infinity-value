@@ -1,8 +1,10 @@
 {
   "name": "com.achieve.infinity-value",
   "displayName": "Infinity Value",
-  "author": "Achieveone",
-  "version": "1.2.0",
+  "author": {
+    "name": "Achieveone"
+  },
+  "version": "1.2.1",
   "unity": "2022.3",
   "description": "Large-number value type for Unity idle and incremental games, with compact unit formatting, parsing, arithmetic, comparison, and optional JSON serialization.",
   "license": "MIT",
