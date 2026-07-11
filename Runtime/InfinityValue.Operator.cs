@@ -126,6 +126,10 @@ namespace Achieve.InfinityValue
         public static InfinityValue operator +(InfinityValue a, long b) => a + new InfinityValue(b);
         /// <summary>InfinityValue에서 long 값을 뺍니다.</summary>
         public static InfinityValue operator -(InfinityValue a, long b) => a - new InfinityValue(b);
+        /// <summary>InfinityValue를 1 증가시킵니다.</summary>
+        public static InfinityValue operator ++(InfinityValue a) => a + 1L;
+        /// <summary>InfinityValue를 1 감소시킵니다. 결과가 음수이면 0을 반환합니다.</summary>
+        public static InfinityValue operator --(InfinityValue a) => a - 1L;
         #endregion
 
         #region Conversion Operators

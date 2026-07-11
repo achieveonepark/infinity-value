@@ -74,7 +74,7 @@ Debug.Log(gold.ToString()); // 5.30B
 
 - Struct-based large number type for Unity runtime code.
 - Stores up to 8 `(unitIndex, value)` pairs.
-- Supports `+`, `-`, `*`, `/`, comparison operators, and primitive conversions.
+- Supports `+`, `-`, `*`, `/`, `++`, `--`, comparison operators, and primitive conversions.
 - Supports per-content unit names through `InfinityValueUnitNames`.
 - Supports safe parsing through `TryParse`.
 - Supports `Pow`, `Sqrt`, `Log10`, and `AffordableCount` for idle-game cost curves.
