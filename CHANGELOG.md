@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## v1.2.2 - 2026.07.11
+
+- (feat) `Pow`, `Sqrt`, and `Log10` added for cost-curve math without overflowing `double`.
+- (feat) `AffordableCount` added to solve the geometric-series "buy max" formula for a price curve `baseCost * growthRate^n`.
+- (feat) `SerializableInfinityValue` added for exposing `InfinityValue` fields in the Unity Inspector, with a custom `PropertyDrawer` that accepts compact notation (e.g. `5.3B`) and a lossless `ToExactString`/`TryParseExact` round-trip.
+- (feat) `InfinityValueCounter` added for async count-up/down UI animations. Concurrent calls from multiple call sites merge into the currently running animation instead of racing or restarting.
+- (chore) Added `Editor/Achieve.InfinityValue.Editor.asmdef` for editor-only inspector code.
+
 ## v1.2.0 - 2026.06.14
 
 - Added `InfinityValueUnitNames` for per-content unit name instances.

@@ -77,6 +77,9 @@ Debug.Log(gold.ToString()); // 5.30B
 - Supports `+`, `-`, `*`, `/`, comparison operators, and primitive conversions.
 - Supports per-content unit names through `InfinityValueUnitNames`.
 - Supports safe parsing through `TryParse`.
+- Supports `Pow`, `Sqrt`, `Log10`, and `AffordableCount` for idle-game cost curves.
+- Supports Unity Inspector editing through `SerializableInfinityValue`.
+- Supports coalescing async count-up/down animations through `InfinityValueCounter`.
 - Includes optional Newtonsoft.Json converter when Unity's Newtonsoft package is installed.
 - Includes Unity Package Manager samples in `Samples~`.
 
@@ -100,4 +103,46 @@ new InfinityValue(string input, InfinityValueUnitNames unitNames)
 ```csharp
 if (!InfinityValue.TryParse("5.30B", goldUnits, out var parsed))
     parsed = InfinityValue.Zero.WithUnitNames(goldUnits);
+```
+
+## Cost Curves
+
+```csharp
+InfinityValue upgradeCost = baseCost * Math.Pow(1.07, level); // price of a single level
+InfinityValue squared = someValue.Pow(2);                     // or someValue.Sqrt()
+
+long maxBuyable = InfinityValue.AffordableCount(gold, baseCost, growthRate: 1.07);
+```
+
+`Pow`/`Sqrt`/`Log10` work in log space, so they stay accurate even when the result would overflow `double`. `AffordableCount` solves the geometric-series "buy max" formula for a price curve `baseCost * growthRate^n`.
+
+## Unity Inspector
+
+`InfinityValue` itself can't be serialized by Unity (it stores its digits as 8 tuples), so use `SerializableInfinityValue` for inspector-exposed fields. A custom `PropertyDrawer` lets you type compact notation like `5.3B` directly in the inspector.
+
+```csharp
+[SerializeField] private SerializableInfinityValue startingGold;
+
+private void Start()
+{
+    InfinityValue gold = startingGold; // implicit conversion
+}
+```
+
+## Animated Counters
+
+`InfinityValueCounter` smoothly counts a displayed value up (or down) to a target over time. Calls from multiple places merge into whichever animation is already running instead of restarting or racing each other, and each call resolves once the shared animation reaches its (possibly updated) target.
+
+```csharp
+private readonly InfinityValueCounter _goldCounter = new InfinityValueCounter(InfinityValue.Zero);
+
+private void Start()
+{
+    _goldCounter.ValueChanged += value => goldLabel.text = value.ToString();
+}
+
+private async void OnRewardEarned(InfinityValue reward)
+{
+    await _goldCounter.AddAsync(reward);
+}
 ```

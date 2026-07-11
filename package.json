@@ -4,7 +4,7 @@
   "author": {
     "name": "Achieveone"
   },
-  "version": "1.2.1",
+  "version": "1.2.2",
   "unity": "2022.3",
   "description": "Large-number value type for Unity idle and incremental games, with compact unit formatting, parsing, arithmetic, comparison, and optional JSON serialization.",
   "license": "MIT",
@@ -39,6 +39,6 @@
     }
   ],
   "_upm": {
-    "changelog": "## Added\n- Added OpenUPM-ready package metadata and installation documentation.\n- Added Unity Package Manager samples under Samples~.\n- Added per-content unit name support and compact decimal parsing improvements."
+    "changelog": "## Added\n- Added Pow, Sqrt, Log10, and AffordableCount for idle-game cost-curve math.\n- Added SerializableInfinityValue and a custom PropertyDrawer for Unity Inspector editing.\n- Added InfinityValueCounter for coalescing async count-up/down UI animations."
   }
 }
