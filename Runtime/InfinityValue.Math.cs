@@ -67,6 +67,38 @@ namespace Achieve.InfinityValue
             return (long)count;
         }
 
+        /// <summary>
+        /// max 대비 현재 값의 진행률을 0~1 사이의 float로 반환합니다. 체력바, 경험치바처럼
+        /// 매 프레임 호출해도 되는 순수 함수이며, 값이 아무리 커도 오버플로 없이 계산합니다.
+        /// </summary>
+        /// <param name="max">진행률의 기준이 되는 최댓값입니다.</param>
+        public float ToProgress(InfinityValue max)
+        {
+            if (max.IsEmpty || IsEmpty) return 0f;
+            if (this >= max) return 1f;
+
+            double ratio = Math.Pow(10, Log10() - max.Log10());
+            if (double.IsNaN(ratio) || ratio <= 0) return 0f;
+            if (ratio >= 1) return 1f;
+            return (float)ratio;
+        }
+
+        /// <summary>두 값 중 더 작은 값을 반환합니다.</summary>
+        public static InfinityValue Min(InfinityValue a, InfinityValue b) => a <= b ? a : b;
+
+        /// <summary>두 값 중 더 큰 값을 반환합니다.</summary>
+        public static InfinityValue Max(InfinityValue a, InfinityValue b) => a >= b ? a : b;
+
+        /// <summary>value를 [min, max] 범위로 제한합니다.</summary>
+        public static InfinityValue Clamp(InfinityValue value, InfinityValue min, InfinityValue max)
+        {
+            if (min > max)
+                throw new ArgumentException($"'{nameof(min)}' cannot be greater than '{nameof(max)}'.");
+            if (value < min) return min;
+            if (value > max) return max;
+            return value;
+        }
+
         private static InfinityValue FromLog10(double log10Value, InfinityValueUnitNames unitNames)
         {
             if (double.IsNaN(log10Value) || log10Value < 0) return Zero.WithUnitNames(unitNames);

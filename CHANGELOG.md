@@ -6,6 +6,8 @@
 
 - (feat) `Pow`, `Sqrt`, and `Log10` added for cost-curve math without overflowing `double`.
 - (feat) `AffordableCount` added to solve the geometric-series "buy max" formula for a price curve `baseCost * growthRate^n`.
+- (feat) `Min`, `Max`, and `Clamp` static helpers added.
+- (feat) `ToProgress` added for safe, overflow-free 0-1 progress bar values.
 - (feat) `SerializableInfinityValue` added for exposing `InfinityValue` fields in the Unity Inspector, with a custom `PropertyDrawer` that accepts compact notation (e.g. `5.3B`) and a lossless `ToExactString`/`TryParseExact` round-trip.
 - (chore) Added `Editor/Achieve.InfinityValue.Editor.asmdef` for editor-only inspector code.
 

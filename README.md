@@ -78,6 +78,7 @@ Debug.Log(gold.ToString()); // 5.30B
 - Supports per-content unit names through `InfinityValueUnitNames`.
 - Supports safe parsing through `TryParse`.
 - Supports `Pow`, `Sqrt`, `Log10`, and `AffordableCount` for idle-game cost curves.
+- Supports `Min`, `Max`, `Clamp`, and `ToProgress` for comparisons and progress bars.
 - Supports Unity Inspector editing through `SerializableInfinityValue`.
 - Includes optional Newtonsoft.Json converter when Unity's Newtonsoft package is installed.
 - Includes Unity Package Manager samples in `Samples~`.
@@ -114,6 +115,15 @@ long maxBuyable = InfinityValue.AffordableCount(gold, baseCost, growthRate: 1.07
 ```
 
 `Pow`/`Sqrt`/`Log10` work in log space, so they stay accurate even when the result would overflow `double`. `AffordableCount` solves the geometric-series "buy max" formula for a price curve `baseCost * growthRate^n`.
+
+## Comparisons & Progress
+
+```csharp
+InfinityValue capped = InfinityValue.Clamp(gold, InfinityValue.Zero, maxGold);
+InfinityValue higher = InfinityValue.Max(playerScore, bestScore);
+
+healthBar.value = currentHp.ToProgress(maxHp); // safe to call every frame
+```
 
 ## Unity Inspector
 

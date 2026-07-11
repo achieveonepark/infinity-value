@@ -39,6 +39,6 @@
     }
   ],
   "_upm": {
-    "changelog": "## Added\n- Added Pow, Sqrt, Log10, and AffordableCount for idle-game cost-curve math.\n- Added SerializableInfinityValue and a custom PropertyDrawer for Unity Inspector editing."
+    "changelog": "## Added\n- Added Pow, Sqrt, Log10, and AffordableCount for idle-game cost-curve math.\n- Added Min, Max, Clamp, and ToProgress helpers.\n- Added SerializableInfinityValue and a custom PropertyDrawer for Unity Inspector editing."
   }
 }
