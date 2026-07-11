@@ -79,7 +79,6 @@ Debug.Log(gold.ToString()); // 5.30B
 - Supports safe parsing through `TryParse`.
 - Supports `Pow`, `Sqrt`, `Log10`, and `AffordableCount` for idle-game cost curves.
 - Supports Unity Inspector editing through `SerializableInfinityValue`.
-- Supports coalescing async count-up/down animations through `InfinityValueCounter`.
 - Includes optional Newtonsoft.Json converter when Unity's Newtonsoft package is installed.
 - Includes Unity Package Manager samples in `Samples~`.
 
@@ -126,23 +125,5 @@ long maxBuyable = InfinityValue.AffordableCount(gold, baseCost, growthRate: 1.07
 private void Start()
 {
     InfinityValue gold = startingGold; // implicit conversion
-}
-```
-
-## Animated Counters
-
-`InfinityValueCounter` smoothly counts a displayed value up (or down) to a target over time. Calls from multiple places merge into whichever animation is already running instead of restarting or racing each other, and each call resolves once the shared animation reaches its (possibly updated) target.
-
-```csharp
-private readonly InfinityValueCounter _goldCounter = new InfinityValueCounter(InfinityValue.Zero);
-
-private void Start()
-{
-    _goldCounter.ValueChanged += value => goldLabel.text = value.ToString();
-}
-
-private async void OnRewardEarned(InfinityValue reward)
-{
-    await _goldCounter.AddAsync(reward);
 }
 ```
