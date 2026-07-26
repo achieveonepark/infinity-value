@@ -9,6 +9,7 @@ title: "API Reference"
 | `InfinityValue` | Large-number value type. |
 | `InfinityValueUnitNames` | Instance-owned unit suffix table for parsing and display. |
 | `InfinityValueConverter` | Optional Newtonsoft.Json converter. |
+| `SerializableInfinityValue` | Serialization wrapper for exposing `InfinityValue` in the Unity Inspector ([details](./inspector)). |
 
 ## Constructors
 
@@ -89,3 +90,8 @@ long asLong = (long)value;
 double asDouble = (double)value;
 float asFloat = (float)value;
 ```
+
+## See Also
+
+- [Math Helpers](./math) — cost curves, `AffordableCount`, `ToProgress`, `Min`/`Max`/`Clamp`, increment/decrement operators
+- [Inspector & Exact Serialization](./inspector) — `SerializableInfinityValue`, `ToExactString`/`TryParseExact`

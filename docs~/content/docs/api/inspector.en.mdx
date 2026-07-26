@@ -1,0 +1,45 @@
+---
+title: "Inspector & Exact Serialization"
+---
+
+`InfinityValue` is stored internally as 8 `(int, long)` tuples, which Unity's serialization system cannot handle directly. `SerializableInfinityValue` wraps it as a single lossless string and provides a custom `PropertyDrawer` for Inspector editing.
+
+## SerializableInfinityValue
+
+Wrap `InfinityValue` in `SerializableInfinityValue` to expose it as a `MonoBehaviour` or `ScriptableObject` field.
+
+```csharp
+using Achieve.InfinityValue;
+using UnityEngine;
+
+public class PlayerStats : MonoBehaviour
+{
+    [SerializeField] private SerializableInfinityValue _gold;
+
+    public InfinityValue Gold => _gold.Value;
+}
+```
+
+In the Inspector, you can type compact notation like `5.3B`; the `PropertyDrawer` parses it and stores the exact underlying value.
+
+It implicitly converts to and from `InfinityValue`, so you rarely need to write `.Value` explicitly.
+
+```csharp
+InfinityValue current = _gold; // implicit conversion
+_gold = current + reward;      // InfinityValue -> SerializableInfinityValue
+```
+
+Unit names are not part of the serialized data — restored values always use `InfinityValueUnitNames.Default`. Apply `WithUnitNames` after loading if you need per-content unit names.
+
+## ToExactString / TryParseExact
+
+`ToString()` rounds for display, but `ToExactString` serializes a value to a string with no precision loss. It's the same format `SerializableInfinityValue` uses internally, and you can use it directly if you're building your own save system.
+
+```csharp
+InfinityValue value = new InfinityValue("5.30B");
+
+string exact = value.ToExactString();
+bool ok = InfinityValue.TryParseExact(exact, InfinityValueUnitNames.Default, out var restored);
+```
+
+`ToExactString` does not include unit names, so re-apply `WithUnitNames` after restoring a value if you need per-content unit names.

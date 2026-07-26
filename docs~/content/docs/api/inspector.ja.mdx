@@ -1,0 +1,45 @@
+---
+title: "インスペクターと厳密なシリアライズ"
+---
+
+`InfinityValue` は内部的に 8 個の `(int, long)` タプルとして保持されているため、Unity のシリアライズシステムが直接扱うことはできません。`SerializableInfinityValue` はこの値を可逆な単一の文字列としてシリアライズし、インスペクター編集用のカスタム `PropertyDrawer` を提供するラッパーです。
+
+## SerializableInfinityValue
+
+`MonoBehaviour` や `ScriptableObject` のフィールドで `InfinityValue` を公開するには、`SerializableInfinityValue` でラップします。
+
+```csharp
+using Achieve.InfinityValue;
+using UnityEngine;
+
+public class PlayerStats : MonoBehaviour
+{
+    [SerializeField] private SerializableInfinityValue _gold;
+
+    public InfinityValue Gold => _gold.Value;
+}
+```
+
+インスペクターでは `5.3B` のようなコンパクト表記で値を入力でき、`PropertyDrawer` がこれをパースして正確な内部値として保存します。
+
+`InfinityValue` と相互に暗黙的変換されるため、ほとんどの場合 `.Value` を明示する必要はありません。
+
+```csharp
+InfinityValue current = _gold; // 暗黙的変換
+_gold = current + reward;      // InfinityValue -> SerializableInfinityValue
+```
+
+単位名はシリアライズ対象に含まれず、復元された値は常に `InfinityValueUnitNames.Default` を使用します。コンテンツごとの単位名が必要な場合は、ロード後に `WithUnitNames` を適用してください。
+
+## ToExactString / TryParseExact
+
+`ToString()` は表示用に丸められますが、`ToExactString` は精度を損なうことなく値を文字列にシリアライズします。これは `SerializableInfinityValue` が内部で使用するのと同じ形式であり、独自のセーブシステムを実装する際にも直接利用できます。
+
+```csharp
+InfinityValue value = new InfinityValue("5.30B");
+
+string exact = value.ToExactString();
+bool ok = InfinityValue.TryParseExact(exact, InfinityValueUnitNames.Default, out var restored);
+```
+
+`ToExactString` には単位名が含まれないため、コンテンツごとの単位名が必要な場合は復元後に `WithUnitNames` を再適用してください。

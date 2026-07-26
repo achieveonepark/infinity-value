@@ -1,0 +1,72 @@
+---
+title: "Math Helpers"
+---
+
+Helpers for cost curves, progress bars, and min/max/clamp — the calculations idle and incremental games reach for constantly. All of them work without converting through `double`, and stay overflow-free even for values beyond the 8 unit slots.
+
+## Cost-Curve Math
+
+`Log10`, `Pow`, and `Sqrt` compute in log space, so they stay precise even for very large values.
+
+```csharp
+InfinityValue cost = new InfinityValue("1.5B");
+
+double log10 = cost.Log10();       // approximate base-10 logarithm
+InfinityValue squared = cost.Pow(2);
+InfinityValue sqrt = cost.Sqrt();  // shorthand for Pow(0.5)
+```
+
+Useful for upgrade cost curves of the form `baseCost * growthRate^level`:
+
+```csharp
+InfinityValue baseCost = new InfinityValue("100");
+double growthRate = 1.07;
+int level = 42;
+
+InfinityValue costAtLevel = baseCost * Math.Pow(growthRate, level);
+```
+
+## Buy-Max Count
+
+`AffordableCount` solves the geometric-series price curve (`baseCost * growthRate^n`) for how many items a given balance can afford. Use it to implement a "buy max" button.
+
+```csharp
+InfinityValue balance = new InfinityValue("50K");
+InfinityValue baseCost = new InfinityValue("100");
+double growthRate = 1.07;
+
+long affordable = InfinityValue.AffordableCount(balance, baseCost, growthRate);
+```
+
+- `growthRate` must be greater than 1.
+- `baseCost` must be greater than 0.
+- Returns `0` if `balance` is less than `baseCost`.
+
+## Progress
+
+`ToProgress` returns the current value's progress toward `max` as an overflow-free `float` between 0 and 1. It's a pure function safe to call every frame, for health bars, experience bars, and similar UI.
+
+```csharp
+InfinityValue exp = new InfinityValue("750");
+InfinityValue expToNextLevel = new InfinityValue("1000");
+
+float progress = exp.ToProgress(expToNextLevel); // 0.75f
+```
+
+## Min / Max / Clamp
+
+```csharp
+InfinityValue lower = InfinityValue.Min(a, b);
+InfinityValue upper = InfinityValue.Max(a, b);
+InfinityValue clamped = InfinityValue.Clamp(value, min, max);
+```
+
+## Increment / Decrement Operators
+
+```csharp
+InfinityValue count = new InfinityValue("10");
+count++; // count + 1
+count--; // count - 1
+```
+
+As with subtraction, a decrement that would go negative clamps to zero.

@@ -12,6 +12,10 @@
 - (feat) `SerializableInfinityValue` added for exposing `InfinityValue` fields in the Unity Inspector, with a custom `PropertyDrawer` that accepts compact notation (e.g. `5.3B`) and a lossless `ToExactString`/`TryParseExact` round-trip.
 - (chore) Added `Editor/Achieve.InfinityValue.Editor.asmdef` for editor-only inspector code.
 
+## v1.2.1 - 2026.07.07
+
+- (chore) Normalized the `author` field in `package.json` to the object schema (`{ "name": "Achieveone" }`) expected by Unity Package Manager / OpenUPM.
+
 ## v1.2.0 - 2026.06.14
 
 - Added `InfinityValueUnitNames` for per-content unit name instances.

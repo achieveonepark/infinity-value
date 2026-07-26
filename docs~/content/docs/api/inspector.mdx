@@ -1,0 +1,46 @@
+---
+title: 인스펙터와 정밀 직렬화
+description: SerializableInfinityValue와 손실 없는 ToExactString/TryParseExact
+---
+
+`InfinityValue`는 내부적으로 8개의 `(int, long)` 튜플로 저장되어 Unity의 직렬화 시스템이 직접 다룰 수 없습니다. `SerializableInfinityValue`는 이 값을 손실 없는 문자열 하나로 직렬화하고, 커스텀 `PropertyDrawer`로 인스펙터 편집을 지원하는 래퍼입니다.
+
+## SerializableInfinityValue
+
+`MonoBehaviour`나 `ScriptableObject` 필드에서 `InfinityValue`를 노출하려면 `SerializableInfinityValue`로 감쌉니다.
+
+```csharp
+using Achieve.InfinityValue;
+using UnityEngine;
+
+public class PlayerStats : MonoBehaviour
+{
+    [SerializeField] private SerializableInfinityValue _gold;
+
+    public InfinityValue Gold => _gold.Value;
+}
+```
+
+인스펙터에서는 `5.3B`처럼 컴팩트 표기로 값을 입력할 수 있으며, `PropertyDrawer`가 이를 파싱해 정확한 내부 값으로 저장합니다.
+
+`InfinityValue`와 상호 암시적으로 변환되므로 대부분의 경우 `.Value`를 명시하지 않아도 됩니다.
+
+```csharp
+InfinityValue current = _gold; // 암시적 변환
+_gold = current + reward;      // InfinityValue -> SerializableInfinityValue
+```
+
+단위 이름은 직렬화 대상이 아니며, 복원된 값은 항상 `InfinityValueUnitNames.Default`를 사용합니다. 콘텐츠별 단위 이름이 필요하다면 로드 후 `WithUnitNames`를 적용하세요.
+
+## ToExactString / TryParseExact
+
+`ToString()`은 표시용으로 반올림되지만, `ToExactString`은 정밀도 손실 없이 값을 문자열로 직렬화합니다. `SerializableInfinityValue`가 내부적으로 사용하는 것과 동일한 형식이며, 직접 저장 시스템을 구현할 때도 쓸 수 있습니다.
+
+```csharp
+InfinityValue value = new InfinityValue("5.30B");
+
+string exact = value.ToExactString();
+bool ok = InfinityValue.TryParseExact(exact, InfinityValueUnitNames.Default, out var restored);
+```
+
+`ToExactString`은 단위 이름을 포함하지 않으므로, 필요하다면 복원 후 `WithUnitNames`로 콘텐츠별 단위 이름을 다시 적용하세요.

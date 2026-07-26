@@ -5,9 +5,26 @@ description: Infinity Value 버전별 변경 내역
 
 ## Unreleased
 
+## 1.2.2 — 2026-07-11
+
+- 오버플로 없이 비용 곡선을 계산할 수 있는 `Pow`, `Sqrt`, `Log10` 추가
+- 등비수열 가격 곡선(`baseCost * growthRate^n`)에서 최대 구매 가능 개수를 계산하는 `AffordableCount` 추가
+- `Min`, `Max`, `Clamp` 정적 헬퍼 추가
+- `operator ++`, `operator --` 추가
+- 오버플로 없는 0~1 진행률 값을 위한 `ToProgress` 추가
+- Unity 인스펙터에 `InfinityValue` 필드를 노출하는 `SerializableInfinityValue` 추가. 컴팩트 표기(`5.3B`)를 지원하는 커스텀 `PropertyDrawer`와, 손실 없이 왕복 변환되는 `ToExactString`/`TryParseExact` 포함
+- 에디터 전용 인스펙터 코드를 위한 `Editor/Achieve.InfinityValue.Editor.asmdef` 추가
+
+## 1.2.1 — 2026-07-07
+
+- Unity Package Manager/OpenUPM이 기대하는 객체 스키마(`{ "name": "Achieveone" }`)로 `package.json`의 `author` 필드 정규화
+
+## 1.2.0 — 2026-06-14
+
 - 콘텐츠별 단위 이름 인스턴스를 위한 `InfinityValueUnitNames` 추가
 - `InfinityValueUnitNames`를 받는 생성자와 `TryParse` 오버로드 추가
 - `5.30B` 같은 컴팩트 소수 문자열 파싱 수정
+- 문서를 GitBook 친화적인 Markdown과 VitePress 배포로 재구성
 - `Samples~` 하위에 Unity Package Manager 샘플 추가
 
 ## 1.1.0 — 2026-05-23

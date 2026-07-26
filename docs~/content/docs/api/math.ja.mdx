@@ -1,0 +1,72 @@
+---
+title: "数学ヘルパー"
+---
+
+コストカーブ、進捗バー、最大/最小/クランプなど、放置・インクリメンタルゲームで頻繁に使う計算のためのヘルパーです。いずれも `double` への変換を経由せず、8 つの単位スロットを超える値でもオーバーフローしません。
+
+## コストカーブの計算
+
+`Log10`、`Pow`、`Sqrt` は対数空間で計算するため、非常に大きな値でも精度を保ちます。
+
+```csharp
+InfinityValue cost = new InfinityValue("1.5B");
+
+double log10 = cost.Log10();       // 常用対数の近似値
+InfinityValue squared = cost.Pow(2);
+InfinityValue sqrt = cost.Sqrt();  // Pow(0.5) の略記
+```
+
+`baseCost * growthRate^level` の形のアップグレードコストカーブを計算する際に便利です。
+
+```csharp
+InfinityValue baseCost = new InfinityValue("100");
+double growthRate = 1.07;
+int level = 42;
+
+InfinityValue costAtLevel = baseCost * Math.Pow(growthRate, level);
+```
+
+## 最大購入数
+
+`AffordableCount` は等比数列の価格カーブ(`baseCost * growthRate^n`)において、所持金でいくつ購入できるかを求めます。「最大購入」ボタンの実装に使用します。
+
+```csharp
+InfinityValue balance = new InfinityValue("50K");
+InfinityValue baseCost = new InfinityValue("100");
+double growthRate = 1.07;
+
+long affordable = InfinityValue.AffordableCount(balance, baseCost, growthRate);
+```
+
+- `growthRate` は 1 より大きい必要があります。
+- `baseCost` は 0 より大きい必要があります。
+- `balance` が `baseCost` 未満の場合は `0` を返します。
+
+## 進捗
+
+`ToProgress` は `max` に対する現在値の進捗を、オーバーフローしない 0〜1 の `float` として返します。体力バーや経験値バーのように毎フレーム呼び出しても安全な純粋関数です。
+
+```csharp
+InfinityValue exp = new InfinityValue("750");
+InfinityValue expToNextLevel = new InfinityValue("1000");
+
+float progress = exp.ToProgress(expToNextLevel); // 0.75f
+```
+
+## Min / Max / Clamp
+
+```csharp
+InfinityValue lower = InfinityValue.Min(a, b);
+InfinityValue upper = InfinityValue.Max(a, b);
+InfinityValue clamped = InfinityValue.Clamp(value, min, max);
+```
+
+## インクリメント/デクリメント演算子
+
+```csharp
+InfinityValue count = new InfinityValue("10");
+count++; // count + 1
+count--; // count - 1
+```
+
+減算と同様に、負になるデクリメントは 0 にクランプされます。

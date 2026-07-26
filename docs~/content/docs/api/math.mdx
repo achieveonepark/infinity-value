@@ -1,0 +1,73 @@
+---
+title: 수학 헬퍼
+description: 비용 곡선, 진행률, 최대/최소/제한을 위한 InfinityValue 수학 함수
+---
+
+증분형 게임에서 자주 쓰이는 비용 곡선, 진행률 바, 최댓값/최솟값 계산을 위한 헬퍼입니다. 모두 `double` 변환을 거치지 않고 8개 단위 슬롯 범위를 넘어서는 값에도 오버플로 없이 동작합니다.
+
+## 비용 곡선 수학
+
+`Log10`, `Pow`, `Sqrt`는 로그 공간에서 계산되므로 매우 큰 값에서도 정밀도를 유지합니다.
+
+```csharp
+InfinityValue cost = new InfinityValue("1.5B");
+
+double log10 = cost.Log10();       // 상용로그 근사값
+InfinityValue squared = cost.Pow(2);
+InfinityValue sqrt = cost.Sqrt();  // Pow(0.5)의 축약형
+```
+
+`baseCost * growthRate^level` 형태의 업그레이드 비용 곡선을 계산할 때 유용합니다.
+
+```csharp
+InfinityValue baseCost = new InfinityValue("100");
+double growthRate = 1.07;
+int level = 42;
+
+InfinityValue costAtLevel = baseCost * Math.Pow(growthRate, level);
+```
+
+## 최대 구매 개수
+
+`AffordableCount`는 등비수열 가격 곡선(`baseCost * growthRate^n`)에서 보유 재화로 몇 개까지 살 수 있는지를 풉니다. "최대 구매" 버튼 구현에 사용합니다.
+
+```csharp
+InfinityValue balance = new InfinityValue("50K");
+InfinityValue baseCost = new InfinityValue("100");
+double growthRate = 1.07;
+
+long affordable = InfinityValue.AffordableCount(balance, baseCost, growthRate);
+```
+
+- `growthRate`는 1보다 커야 합니다.
+- `baseCost`는 0보다 커야 합니다.
+- `balance`가 `baseCost`보다 작으면 `0`을 반환합니다.
+
+## 진행률
+
+`ToProgress`는 `max` 대비 현재 값의 진행률을 오버플로 없이 0~1 사이의 `float`로 반환합니다. 체력바, 경험치바처럼 매 프레임 호출해도 안전한 순수 함수입니다.
+
+```csharp
+InfinityValue exp = new InfinityValue("750");
+InfinityValue expToNextLevel = new InfinityValue("1000");
+
+float progress = exp.ToProgress(expToNextLevel); // 0.75f
+```
+
+## Min / Max / Clamp
+
+```csharp
+InfinityValue lower = InfinityValue.Min(a, b);
+InfinityValue upper = InfinityValue.Max(a, b);
+InfinityValue clamped = InfinityValue.Clamp(value, min, max);
+```
+
+## 증가/감소 연산자
+
+```csharp
+InfinityValue count = new InfinityValue("10");
+count++; // count + 1
+count--; // count - 1
+```
+
+뺄셈과 마찬가지로, 결과가 음수가 되는 감소는 0으로 클램프됩니다.

@@ -1,0 +1,72 @@
+---
+title: "数学辅助函数"
+---
+
+用于成长曲线、进度条、最大/最小/限制计算的辅助函数，这些都是放置类和增量类游戏中经常用到的计算。它们都无需转换为 `double`，即使数值超出 8 个单位槽的范围也不会溢出。
+
+## 成长曲线计算
+
+`Log10`、`Pow`、`Sqrt` 在对数空间中计算，因此即使数值非常大也能保持精度。
+
+```csharp
+InfinityValue cost = new InfinityValue("1.5B");
+
+double log10 = cost.Log10();       // 常用对数近似值
+InfinityValue squared = cost.Pow(2);
+InfinityValue sqrt = cost.Sqrt();  // Pow(0.5) 的简写
+```
+
+适用于计算 `baseCost * growthRate^level` 形式的升级成本曲线：
+
+```csharp
+InfinityValue baseCost = new InfinityValue("100");
+double growthRate = 1.07;
+int level = 42;
+
+InfinityValue costAtLevel = baseCost * Math.Pow(growthRate, level);
+```
+
+## 最大可购买数量
+
+`AffordableCount` 用于在等比价格曲线(`baseCost * growthRate^n`)中，求解当前余额最多能购买多少个物品，可用于实现"最大购买"按钮。
+
+```csharp
+InfinityValue balance = new InfinityValue("50K");
+InfinityValue baseCost = new InfinityValue("100");
+double growthRate = 1.07;
+
+long affordable = InfinityValue.AffordableCount(balance, baseCost, growthRate);
+```
+
+- `growthRate` 必须大于 1。
+- `baseCost` 必须大于 0。
+- 若 `balance` 小于 `baseCost`，返回 `0`。
+
+## 进度
+
+`ToProgress` 返回当前值相对于 `max` 的进度，结果是一个不会溢出、范围在 0~1 之间的 `float`。它是一个纯函数，适合像血条、经验条这样每帧调用的场景。
+
+```csharp
+InfinityValue exp = new InfinityValue("750");
+InfinityValue expToNextLevel = new InfinityValue("1000");
+
+float progress = exp.ToProgress(expToNextLevel); // 0.75f
+```
+
+## Min / Max / Clamp
+
+```csharp
+InfinityValue lower = InfinityValue.Min(a, b);
+InfinityValue upper = InfinityValue.Max(a, b);
+InfinityValue clamped = InfinityValue.Clamp(value, min, max);
+```
+
+## 自增/自减运算符
+
+```csharp
+InfinityValue count = new InfinityValue("10");
+count++; // count + 1
+count--; // count - 1
+```
+
+与减法一样，若自减结果为负数，则会被限制为 0。

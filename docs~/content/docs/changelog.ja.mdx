@@ -4,9 +4,26 @@ title: "変更履歴"
 
 ## 未リリース
 
-- Docusaurus サイトとしてドキュメントを再構築
+## 1.2.2 — 2026-07-11
+
+- `double` をオーバーフローさせずにコストカーブを計算できる `Pow`、`Sqrt`、`Log10` を追加
+- 等比数列の価格カーブ(`baseCost * growthRate^n`)で最大購入可能数を求める `AffordableCount` を追加
+- `Min`、`Max`、`Clamp` の静的ヘルパーを追加
+- `operator ++`、`operator --` を追加
+- オーバーフローしない 0〜1 の進捗値を返す `ToProgress` を追加
+- Unity インスペクターに `InfinityValue` フィールドを公開する `SerializableInfinityValue` を追加。コンパクト表記(`5.3B`)に対応したカスタム `PropertyDrawer` と、可逆変換できる `ToExactString`/`TryParseExact` を含む
+- エディター専用インスペクターコードのための `Editor/Achieve.InfinityValue.Editor.asmdef` を追加
+
+## 1.2.1 — 2026-07-07
+
+- `package.json` の `author` フィールドを、Unity Package Manager/OpenUPM が期待するオブジェクトスキーマ(`{ "name": "Achieveone" }`)に正規化
+
+## 1.2.0 — 2026-06-14
+
 - コンテンツごとの単位名インスタンスのために `InfinityValueUnitNames` を追加
 - `InfinityValueUnitNames` を受け取るコンストラクターおよび `TryParse` オーバーロードを追加
+- `5.30B` のようなコンパクトな小数文字列のパースを修正
+- ドキュメントを GitBook 対応の Markdown と VitePress デプロイに再構築
 - `Samples~` に Unity Package Manager サンプルを追加
 
 ## 1.1.0 — 2026-05-23

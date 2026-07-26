@@ -9,6 +9,7 @@ title: "API リファレンス"
 | `InfinityValue` | 大きな数値の値型 |
 | `InfinityValueUnitNames` | パースと表示のためのインスタンス単位サフィックステーブル |
 | `InfinityValueConverter` | オプションの Newtonsoft.Json コンバーター |
+| `SerializableInfinityValue` | Unity インスペクターに `InfinityValue` を公開するシリアライズラッパー([詳細](./inspector)) |
 
 ## コンストラクター
 
@@ -89,3 +90,8 @@ long asLong = (long)value;
 double asDouble = (double)value;
 float asFloat = (float)value;
 ```
+
+## 関連ドキュメント
+
+- [数学ヘルパー](./math) — コストカーブ、`AffordableCount`、`ToProgress`、`Min`/`Max`/`Clamp`、インクリメント/デクリメント演算子
+- [インスペクターと厳密なシリアライズ](./inspector) — `SerializableInfinityValue`、`ToExactString`/`TryParseExact`

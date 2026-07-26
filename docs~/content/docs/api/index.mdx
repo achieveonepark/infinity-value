@@ -10,6 +10,7 @@ description: InfinityValue 주요 타입, 생성자, 연산자, 변환
 | `InfinityValue` | 큰 수 값 타입 |
 | `InfinityValueUnitNames` | 파싱·표시에 쓰이는 인스턴스 단위 접미사 테이블 |
 | `InfinityValueConverter` | 선택적 Newtonsoft.Json 컨버터 |
+| `SerializableInfinityValue` | Unity 인스펙터에 `InfinityValue`를 노출하는 직렬화 래퍼 ([자세히](./inspector)) |
 
 ## 생성자
 
@@ -90,3 +91,8 @@ long asLong = (long)value;
 double asDouble = (double)value;
 float asFloat = (float)value;
 ```
+
+## 더 보기
+
+- [수학 헬퍼](./math) — 비용 곡선, `AffordableCount`, `ToProgress`, `Min`/`Max`/`Clamp`, 증가/감소 연산자
+- [인스펙터와 정밀 직렬화](./inspector) — `SerializableInfinityValue`, `ToExactString`/`TryParseExact`

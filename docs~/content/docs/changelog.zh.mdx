@@ -4,9 +4,26 @@ title: "更新日志"
 
 ## 未发布
 
-- 将文档重建为 Docusaurus 站点
+## 1.2.2 — 2026-07-11
+
+- 新增 `Pow`、`Sqrt`、`Log10`，可在不溢出 `double` 的情况下计算成长曲线
+- 新增 `AffordableCount`，用于在等比价格曲线(`baseCost * growthRate^n`)中求解"最大可购买数量"
+- 新增 `Min`、`Max`、`Clamp` 静态辅助方法
+- 新增 `operator ++`、`operator --`
+- 新增 `ToProgress`，可安全计算不会溢出的 0~1 进度值
+- 新增 `SerializableInfinityValue`，用于在 Unity Inspector 中暴露 `InfinityValue` 字段，配套支持紧凑表示法(如 `5.3B`)的自定义 `PropertyDrawer`，以及可无损往返转换的 `ToExactString`/`TryParseExact`
+- 新增仅供编辑器使用的检视面板代码所需的 `Editor/Achieve.InfinityValue.Editor.asmdef`
+
+## 1.2.1 — 2026-07-07
+
+- 将 `package.json` 中的 `author` 字段规范为 Unity Package Manager/OpenUPM 所期望的对象结构(`{ "name": "Achieveone" }`)
+
+## 1.2.0 — 2026-06-14
+
 - 新增 `InfinityValueUnitNames` 以支持按内容定制单位名称实例
 - 新增接受 `InfinityValueUnitNames` 的构造函数和 `TryParse` 重载
+- 修复 `5.30B` 等紧凑小数字符串的解析问题
+- 将文档重建为兼容 GitBook 的 Markdown，并部署到 VitePress
 - 在 `Samples~` 中添加 Unity Package Manager 示例
 
 ## 1.1.0 — 2026-05-23

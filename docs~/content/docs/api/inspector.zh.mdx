@@ -1,0 +1,45 @@
+---
+title: "检视面板与精确序列化"
+---
+
+`InfinityValue` 在内部以 8 个 `(int, long)` 元组存储，Unity 的序列化系统无法直接处理这种结构。`SerializableInfinityValue` 将其封装为单个无损字符串进行序列化，并提供自定义 `PropertyDrawer` 以支持在检视面板中编辑。
+
+## SerializableInfinityValue
+
+要在 `MonoBehaviour` 或 `ScriptableObject` 字段中暴露 `InfinityValue`，请使用 `SerializableInfinityValue` 包装它。
+
+```csharp
+using Achieve.InfinityValue;
+using UnityEngine;
+
+public class PlayerStats : MonoBehaviour
+{
+    [SerializeField] private SerializableInfinityValue _gold;
+
+    public InfinityValue Gold => _gold.Value;
+}
+```
+
+在检视面板中，你可以输入 `5.3B` 这样的紧凑表示法，`PropertyDrawer` 会解析它并存储为精确的内部值。
+
+它可以与 `InfinityValue` 相互隐式转换，因此大多数情况下无需显式写 `.Value`。
+
+```csharp
+InfinityValue current = _gold; // 隐式转换
+_gold = current + reward;      // InfinityValue -> SerializableInfinityValue
+```
+
+单位名称不属于序列化数据的一部分，恢复后的值始终使用 `InfinityValueUnitNames.Default`。如果需要按内容定制单位名称，请在加载后应用 `WithUnitNames`。
+
+## ToExactString / TryParseExact
+
+`ToString()` 会为显示而四舍五入，而 `ToExactString` 则可以无损地将值序列化为字符串。这与 `SerializableInfinityValue` 内部使用的格式相同，如果你要自行实现存档系统，也可以直接使用它。
+
+```csharp
+InfinityValue value = new InfinityValue("5.30B");
+
+string exact = value.ToExactString();
+bool ok = InfinityValue.TryParseExact(exact, InfinityValueUnitNames.Default, out var restored);
+```
+
+`ToExactString` 不包含单位名称，如果需要按内容定制单位名称，请在恢复值后重新应用 `WithUnitNames`。

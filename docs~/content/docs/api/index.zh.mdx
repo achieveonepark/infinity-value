@@ -9,6 +9,7 @@ title: "API 参考"
 | `InfinityValue` | 大数值类型 |
 | `InfinityValueUnitNames` | 用于解析和显示的实例单位后缀表 |
 | `InfinityValueConverter` | 可选的 Newtonsoft.Json 转换器 |
+| `SerializableInfinityValue` | 用于在 Unity 检视面板中暴露 `InfinityValue` 的序列化包装器([详情](./inspector)) |
 
 ## 构造函数
 
@@ -89,3 +90,8 @@ long asLong = (long)value;
 double asDouble = (double)value;
 float asFloat = (float)value;
 ```
+
+## 另请参阅
+
+- [数学辅助函数](./math) — 成长曲线、`AffordableCount`、`ToProgress`、`Min`/`Max`/`Clamp`、自增/自减运算符
+- [检视面板与精确序列化](./inspector) — `SerializableInfinityValue`、`ToExactString`/`TryParseExact`
